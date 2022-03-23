@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Pilot;
-import br.com.artcruz.codeminerchallenge.domain.repository.GenericRepository;
+import br.com.artcruz.codeminerchallenge.domain.repository.Repository;
 
 /**
  * @author: Arthur Cruz
@@ -22,7 +22,7 @@ import br.com.artcruz.codeminerchallenge.domain.repository.GenericRepository;
 class PilotRepositoryTest {
 
 	@Autowired
-	private GenericRepository<Pilot> pilotRepository;
+	private Repository<Pilot> pilotRepository;
 
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -36,7 +36,7 @@ class PilotRepositoryTest {
 		Pilot pilot = new Pilot();
 
 		try {
-			pilot.setAge(sdf.parse("29/06/2002"));
+			pilot.setBirthDate(sdf.parse("29/06/2002"));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

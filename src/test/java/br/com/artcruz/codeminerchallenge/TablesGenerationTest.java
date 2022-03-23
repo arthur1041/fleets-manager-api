@@ -29,7 +29,7 @@ class TablesGenerationTest {
 		Pilot pilot = new Pilot();
 
 		try {
-			pilot.setAge(sdf.parse("29/06/2002"));
+			pilot.setBirthDate(sdf.parse("29/06/2002"));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

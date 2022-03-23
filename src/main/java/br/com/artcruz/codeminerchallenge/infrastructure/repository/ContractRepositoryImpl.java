@@ -10,13 +10,13 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Contract;
-import br.com.artcruz.codeminerchallenge.domain.repository.GenericRepository;
+import br.com.artcruz.codeminerchallenge.domain.repository.Repository;
 
 /**
  * @author: Arthur Cruz
  */
 @Component
-public class ContractRepositoryImpl implements GenericRepository<Contract> {
+public class ContractRepositoryImpl implements Repository<Contract> {
 
 	@PersistenceContext
 	private EntityManager entityManager;

@@ -44,7 +44,7 @@ public class Pilot implements Serializable {
 	 * pilot age
 	 * */
 	@Column(nullable = false)
-	private Date age;
+	private Date birthDate;
 
 	/**
 	 * amount of money owned by the pilot
@@ -87,12 +87,16 @@ public class Pilot implements Serializable {
 		this.name = name;
 	}
 
-	public Date getAge() {
-		return age;
+	public Date getBirthDate() {
+		return birthDate;
 	}
 
-	public void setAge(Date age) {
-		this.age = age;
+	public void setBirthDate(Date birthdate) {
+		this.birthDate = birthdate;
+	}
+	
+	public int getAge() {
+		return 0;
 	}
 
 	public Integer getCredits() {
@@ -109,14 +113,6 @@ public class Pilot implements Serializable {
 
 	public void setLocationPlanet(String locationPlanet) {
 		this.locationPlanet = locationPlanet;
-	}
-
-	public List<Ship> getShip() {
-		return ships;
-	}
-
-	public void setShip(List<Ship> ships) {
-		this.ships = ships;
 	}
 
 	public List<Ship> getShips() {
@@ -159,7 +155,7 @@ public class Pilot implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Pilot [id=" + id + ", pilotCertification=" + pilotCertification + ", name=" + name + ", age=" + age
+		return "Pilot [id=" + id + ", pilotCertification=" + pilotCertification + ", name=" + name + ", age=" + birthDate
 				+ ", credits=" + credits + ", locationPlanet=" + locationPlanet + "]";
 	}
 	

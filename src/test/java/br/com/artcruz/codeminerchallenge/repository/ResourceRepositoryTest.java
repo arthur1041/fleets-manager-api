@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.artcruz.codeminerchallenge.domain.enums.ResourceNameEnum;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Resource;
-import br.com.artcruz.codeminerchallenge.domain.repository.GenericRepository;
+import br.com.artcruz.codeminerchallenge.domain.repository.Repository;
 
 /**
  * @author: Arthur Cruz
@@ -20,7 +20,7 @@ import br.com.artcruz.codeminerchallenge.domain.repository.GenericRepository;
 class ResourceRepositoryTest {
 
 	@Autowired
-	private GenericRepository<Resource> resourceRepository;
+	private Repository<Resource> resourceRepository;
 
 	@Test
 	public void list() {

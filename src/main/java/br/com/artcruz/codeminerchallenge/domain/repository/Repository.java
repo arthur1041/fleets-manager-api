@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * @author: Arthur Cruz
  */
-public interface GenericRepository<T> {
+public interface Repository<T> {
 
 	List<T> list();
 	T findById(int id);
