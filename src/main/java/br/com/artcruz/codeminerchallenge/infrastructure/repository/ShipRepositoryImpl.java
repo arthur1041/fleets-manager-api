@@ -10,13 +10,13 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Ship;
-import br.com.artcruz.codeminerchallenge.domain.repository.Repository;
+import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
 
 /**
  * @author: Arthur Cruz
  */
 @Component
-public class ShipRepositoryImpl implements Repository<Ship> {
+public class ShipRepositoryImpl implements IRepository<Ship> {
 
 	@PersistenceContext
 	private EntityManager entityManager;

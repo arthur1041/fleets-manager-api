@@ -43,7 +43,7 @@ public class Pilot implements Serializable {
 	/**
 	 * pilot age
 	 * */
-	@Column(nullable = false)
+	@Column(name = "birth_date", nullable = false)
 	private Date birthDate;
 
 	/**

@@ -4,29 +4,39 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
 
 import br.com.artcruz.codeminerchallenge.domain.exception.EntityNotFoundException;
 import br.com.artcruz.codeminerchallenge.domain.exception.InvalidPlanetNameException;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Contract;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Pilot;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Ship;
-import br.com.artcruz.codeminerchallenge.domain.repository.Repository;
+import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
 import br.com.artcruz.codeminerchallenge.util.Utils;
 
-public class ContractService implements Service<Contract> {
+@Service
+public class ContractService implements IService<Contract> {
 
 	@Autowired
-	private Repository<Contract> contractRepository;
+	private IRepository<Contract> contractRepository;
 	
 	@Autowired
-	private Repository<Pilot> pilotRepository;
+	private IRepository<Pilot> pilotRepository;
 	
 	@Autowired
-	private Repository<Ship> shipRepository;
+	private IRepository<Ship> shipRepository;
 	
 	
 	@Override
 	public Contract save(Contract contract) {
+		if(!Utils.validatePlanetName(contract.getDestinationPlanet())) {
+			throw new InvalidPlanetNameException();
+		}
+		
+		if(!Utils.validatePlanetName(contract.getOriginPlanet())) {
+			throw new InvalidPlanetNameException();
+		}
+		
 		return contractRepository.createOrUpdate(contract);
 	}
 
@@ -46,7 +56,7 @@ public class ContractService implements Service<Contract> {
 			currentContract.setPilot(pilot);
 		}
 		
-		if(contract.getShip() == null) {
+		if(contract.getShip() != null) {
 			Ship ship = shipRepository.findById(contract.getShip().getId());
 			
 			if(ship == null)

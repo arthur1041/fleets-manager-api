@@ -2,7 +2,7 @@ package br.com.artcruz.codeminerchallenge.domain.service;
 
 import java.util.List;
 
-public interface Service<T> {
+public interface IService<T> {
 
 	public T save(T obj);
 	

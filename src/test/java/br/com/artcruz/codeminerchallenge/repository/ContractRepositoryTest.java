@@ -13,7 +13,7 @@ import br.com.artcruz.codeminerchallenge.domain.model.entity.Ship;
 import br.com.artcruz.codeminerchallenge.domain.enums.PlanetEnum;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Contract;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Resource;
-import br.com.artcruz.codeminerchallenge.domain.repository.Repository;
+import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
 
 /**
  * @author: Arthur Cruz
@@ -22,13 +22,13 @@ import br.com.artcruz.codeminerchallenge.domain.repository.Repository;
 class ContractRepositoryTest {
 
 	@Autowired
-	private Repository<Contract> contractRepository;
+	private IRepository<Contract> contractRepository;
 	
 	@Autowired
-	private Repository<Ship> shipRepository;
+	private IRepository<Ship> shipRepository;
 
 	@Autowired
-	private Repository<Resource> resourceRepository;
+	private IRepository<Resource> resourceRepository;
 
 	@Test
 	public void list() {

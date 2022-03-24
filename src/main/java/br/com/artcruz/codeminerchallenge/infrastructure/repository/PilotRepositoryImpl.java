@@ -10,13 +10,13 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Pilot;
-import br.com.artcruz.codeminerchallenge.domain.repository.Repository;
+import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
 
 /**
  * @author: Arthur Cruz
  */
 @Component
-public class PilotRepositoryImpl implements Repository<Pilot> {
+public class PilotRepositoryImpl implements IRepository<Pilot> {
 
 	@PersistenceContext
 	private EntityManager entityManager;

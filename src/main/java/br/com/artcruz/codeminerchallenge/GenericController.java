@@ -7,4 +7,6 @@ public abstract class GenericController<T, R> {
 	@Autowired
 	protected R thisRepository;
 	
+	
+	
 }

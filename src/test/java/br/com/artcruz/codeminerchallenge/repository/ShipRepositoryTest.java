@@ -13,7 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Pilot;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Ship;
-import br.com.artcruz.codeminerchallenge.domain.repository.Repository;
+import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
 
 /**
  * @author: Arthur Cruz
@@ -22,10 +22,10 @@ import br.com.artcruz.codeminerchallenge.domain.repository.Repository;
 class ShipRepositoryTest {
 
 	@Autowired
-	private Repository<Ship> shipRepository;
+	private IRepository<Ship> shipRepository;
 	
 	@Autowired
-	private Repository<Pilot> pilotRepository;
+	private IRepository<Pilot> pilotRepository;
 
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 

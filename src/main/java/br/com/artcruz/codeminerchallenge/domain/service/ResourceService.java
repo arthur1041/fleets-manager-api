@@ -4,22 +4,29 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
 
 import br.com.artcruz.codeminerchallenge.domain.exception.EntityNotFoundException;
+import br.com.artcruz.codeminerchallenge.domain.exception.InvalidResourceNameException;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Contract;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Resource;
-import br.com.artcruz.codeminerchallenge.domain.repository.Repository;
+import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
+import br.com.artcruz.codeminerchallenge.util.Utils;
 
-public class ResourceService implements Service<Resource> {
+@Service
+public class ResourceService implements IService<Resource> {
 
 	@Autowired
-	private Repository<Resource> resourceRepository;
+	private IRepository<Resource> resourceRepository;
  	
 	@Autowired
-	private Repository<Contract> contractRepository;
+	private IRepository<Contract> contractRepository;
 	
 	@Override
 	public Resource save(Resource resource) {
+		if(!Utils.validateResourceName(resource.getName()))
+			throw new InvalidResourceNameException();
+		
 		return resourceRepository.createOrUpdate(resource);
 	}
 
@@ -37,8 +44,12 @@ public class ResourceService implements Service<Resource> {
 				throw new EntityNotFoundException(Contract.class, resource.getContract().getId());
 		}
 		
-		if(resource.getName() != null)
+		if(resource.getName() != null) {
+			if(!Utils.validateResourceName(resource.getName()))
+				throw new InvalidResourceNameException();
+			
 			currentResource.setName(resource.getName());
+		}
 		
 		if(resource.getWeight() != null)
 			currentResource.setWeight(resource.getWeight());

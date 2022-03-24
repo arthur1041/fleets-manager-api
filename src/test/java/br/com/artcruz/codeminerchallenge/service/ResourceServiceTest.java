@@ -1,4 +1,4 @@
-package br.com.artcruz.codeminerchallenge.repository;
+package br.com.artcruz.codeminerchallenge.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -10,56 +10,62 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.artcruz.codeminerchallenge.domain.enums.ResourceEnum;
+import br.com.artcruz.codeminerchallenge.domain.model.entity.Contract;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Resource;
 import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
+import br.com.artcruz.codeminerchallenge.domain.service.IService;
 
-/**
- * @author: Arthur Cruz
- */
 @SpringBootTest
-class ResourceRepositoryTest {
+class ResourceServiceTest {
 
+	@Autowired
+	private IService<Resource> resourceService;
+	
+	@Autowired
+	private IService<Contract> contractService;
+	
 	@Autowired
 	private IRepository<Resource> resourceRepository;
 
 	@Test
-	public void list() {
-		assertTrue(resourceRepository.list().size() > 0);
-	}
-
-	@Test
-	public void create() {
+	public void save() {
 		Resource resource = new Resource();
 
-		
 		resource.setName(ResourceEnum.MINERALS.label);
 		resource.setWeight(100);
-
-		Resource resourceDb = resourceRepository.createOrUpdate(resource);
-
+		resource.setContract(contractService.find(1));
+		
+		Resource resourceDb = resourceService.save(resource);
+		
 		assertNotNull(resourceDb);
-
 	}
 
 	@Test
 	public void update() {
-		Resource resource = resourceRepository.findById(1);
-		
+		Resource resource = new Resource();
+
 		resource.setName(ResourceEnum.FOOD.label);
 		
-		resourceRepository.createOrUpdate(resource);
+		Resource resourceDb = resourceService.update(1, resource);
 		
-		assertEquals(resourceRepository.findById(1).getName(), ResourceEnum.FOOD.label);
+		assertEquals(resourceDb.getName(), resource.getName());
+	}
+
+	@Test
+	public void list() {
+		assertTrue(resourceService.list().size() > 0);
 	}
 	
 	@Test
-	public void findById() {
-		assertNotNull(resourceRepository.findById(1));
+	public void find() {
+		assertNotNull(resourceService.find(1));
 	}
-	
+
 	@Test
-	public void delete() {
-		resourceRepository.delete(1);
+	public void remove() {
+		resourceService.remove(1);
+		
 		assertNull(resourceRepository.findById(1));
 	}
+	
 }

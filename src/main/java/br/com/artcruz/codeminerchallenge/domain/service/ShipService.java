@@ -4,19 +4,21 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
 
 import br.com.artcruz.codeminerchallenge.domain.exception.EntityNotFoundException;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Pilot;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Ship;
-import br.com.artcruz.codeminerchallenge.domain.repository.Repository;
+import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
 
-public class ShipService implements Service<Ship>{
+@Service
+public class ShipService implements IService<Ship>{
 
 	@Autowired
-	private Repository<Ship> shipRepository;
+	private IRepository<Ship> shipRepository;
 	
 	@Autowired
-	private Repository<Pilot> pilotRepository;
+	private IRepository<Pilot> pilotRepository;
 	
 	@Override
 	public Ship save(Ship ship) {

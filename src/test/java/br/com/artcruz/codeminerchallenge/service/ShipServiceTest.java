@@ -5,66 +5,67 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Date;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Pilot;
+import br.com.artcruz.codeminerchallenge.domain.model.entity.Ship;
 import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
 import br.com.artcruz.codeminerchallenge.domain.service.IService;
 
 @SpringBootTest
-class PilotServiceTest {
+class ShipServiceTest {
 
+	@Autowired
+	private IService<Ship> shipService;
+	
 	@Autowired
 	private IService<Pilot> pilotService;
 	
 	@Autowired
-	private IRepository<Pilot> pilotRepository;
+	private IRepository<Ship> shipRepository;
 
 	@Test
 	public void save() {
-		Pilot pilot = new Pilot();
+		Ship ship = new Ship();
 
-		pilot.setName("Adam");
-		pilot.setBirthDate(new Date());
-		pilot.setCredits(1000);
-		pilot.setLocationPlanet("Aqua");
-		pilot.setPilotCertification("0000000");
-
-		Pilot pilotDb = pilotService.save(pilot);
+		ship.setFuelCapacity(1);
+		ship.setFuelLevel(1);
+		ship.setPilot(pilotService.find(1));
+		ship.setWeightCapacity(1);
 		
-		assertNotNull(pilotDb);
+		Ship shipDb = shipService.save(ship);
+		
+		assertNotNull(shipDb);
 	}
 
 	@Test
 	public void update() {
-		Pilot pilot = new Pilot();
+		Ship ship = new Ship();
 
-		pilot.setName("Louis");
+		ship.setFuelCapacity(10);
 		
-		Pilot pilotDb = pilotService.update(1, pilot);
+		Ship shipDb = shipService.update(1, ship);
 		
-		assertEquals(pilotDb.getName(), pilot.getName());
+		assertEquals(shipDb.getFuelCapacity(), ship.getFuelCapacity());
 	}
 
 	@Test
 	public void list() {
-		assertTrue(pilotService.list().size() > 0);
+		assertTrue(shipService.list().size() > 0);
 	}
 	
 	@Test
 	public void find() {
-		assertNotNull(pilotService.find(1));
+		assertNotNull(shipService.find(1));
 	}
 
 	@Test
 	public void remove() {
-		pilotService.remove(1);
+		shipService.remove(1);
 		
-		assertNull(pilotRepository.findById(1));
+		assertNull(shipRepository.findById(1));
 	}
 	
 }
