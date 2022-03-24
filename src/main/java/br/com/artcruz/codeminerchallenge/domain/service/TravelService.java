@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.artcruz.codeminerchallenge.domain.exception.BlockedRouteException;
-import br.com.artcruz.codeminerchallenge.domain.exception.ContractNotAcceptedExeception;
 import br.com.artcruz.codeminerchallenge.domain.exception.InvalidTravelDestinationException;
-import br.com.artcruz.codeminerchallenge.domain.exception.NoPayloadException;
 import br.com.artcruz.codeminerchallenge.domain.exception.NoShipsAvailableException;
 import br.com.artcruz.codeminerchallenge.domain.exception.NotEnoughFuelException;
 import br.com.artcruz.codeminerchallenge.domain.exception.PilotTooYoungException;
@@ -139,23 +137,14 @@ public class TravelService {
 	}
 
 	public void doContractualTravel(Contract contract) {
-		if (contract.isAccepted()) {
-			if(contract.getPayload().size() <= 0)
-				throw new NoPayloadException();
-			
 			int idPlanetFrom = PlanetHelper.getPlanetIdByName(contract.getOriginPlanet());
 			int idPlanetTo = PlanetHelper.getPlanetIdByName(contract.getDestinationPlanet());
 			doTravel(idPlanetFrom, idPlanetTo, contract.getPilot().getId(), contract.getResourcesTotalWeight());
 
-			// only finishes the contract if it was accepted in a previous moment
-			contract.setAccomplished(true);
 			Pilot pilot = contract.getPilot();
-
+			
 			// 6. Grant credits to the pilot after fulfilling the contract
 			pilot.addCredits(contract.getValue());
-		} else {
-			throw new ContractNotAcceptedExeception();
-		}
 	}
 
 }

@@ -42,7 +42,7 @@ public class ShipService implements IService<Ship>{
 	}
 
 	@Override
-	public Ship update(int id, Ship ship) {
+	public Ship update(Integer id, Ship ship) {
 		Ship currentShip = shipRepository.findById(id);
 		
 		if(currentShip == null)
@@ -67,7 +67,7 @@ public class ShipService implements IService<Ship>{
 	}
 
 	@Override
-	public Ship find(int id) {
+	public Ship find(Integer id) {
 		Ship ship = shipRepository.findById(id);
 		
 		if(ship == null)

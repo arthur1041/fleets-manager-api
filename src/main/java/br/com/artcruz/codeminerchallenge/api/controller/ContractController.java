@@ -30,35 +30,49 @@ public class ContractController {
 
 	@Autowired
 	private IService<Contract> contractService;
-
+	
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping
 	public List<Contract> list() {
 		return contractService.list();
 	}
 
-	//4. List open contracts
+	// 4. List open contracts
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping("/open")
 	public List<Contract> listOpen() {
 		return ((ContractService) contractService).listOpenContracts();
 	}
-	
-	//5. Accept transport contracts
+
+	// 5. Accept transport contracts
 	@PutMapping("/accept/{contractId}")
-	public ResponseEntity<?> acceptContract(@PathVariable("contractId") Integer id){
+	public ResponseEntity<?> acceptContract(@PathVariable("contractId") Integer id) {
 		final HttpHeaders httpHeaders = new HttpHeaders();
 		try {
 			httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 			((ContractService) contractService).acceptContract(id);
-			return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(Utils.getJsonBody("Message", "Contract accepet succesfully! Now you can execute it."));
+			return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders)
+					.body(Utils.getJsonBody("Message", "Contract accepet succesfully! Now you can execute it."));
 		} catch (EntityNotFoundException e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(httpHeaders)
 					.body(Utils.getJsonBody("message", e.getMessage()));
 		}
-		
+
 	}
-	
+
+	@PutMapping("/execute/{contractId}")
+	public ResponseEntity<?> executeContract(@PathVariable("contractId") Integer id) {
+		Contract contract = contractService.find(id);
+		
+		try {
+			((ContractService) contractService).executeContract(null);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return null;
+	}
+
 	@GetMapping("/{contractId}")
 	public ResponseEntity<?> find(@PathVariable("contractId") Integer id) {
 		final HttpHeaders httpHeaders = new HttpHeaders();
@@ -71,7 +85,7 @@ public class ContractController {
 		}
 	}
 
-	//2. Publish transport contracts
+	// 2. Publish transport contracts
 	@PostMapping
 	public ResponseEntity<?> add(@RequestBody Contract contract) {
 		final HttpHeaders httpHeaders = new HttpHeaders();
@@ -79,9 +93,11 @@ public class ContractController {
 		try {
 			return ResponseEntity.status(HttpStatus.CREATED).body(contractService.save(contract));
 		} catch (InvalidPlanetNameException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(httpHeaders).body(Utils.getJsonBody("Message", e.getMessage()));
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(httpHeaders)
+					.body(Utils.getJsonBody("Message", e.getMessage()));
 		} catch (EmptyAttributeException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(httpHeaders).body(Utils.getJsonBody("Message", e.getMessage()));
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(httpHeaders)
+					.body(Utils.getJsonBody("Message", e.getMessage()));
 		}
 	}
 

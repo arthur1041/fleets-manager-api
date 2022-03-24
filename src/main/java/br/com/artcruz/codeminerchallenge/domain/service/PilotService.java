@@ -47,7 +47,7 @@ public class PilotService implements IService<Pilot> {
 	}
 
 	@Override
-	public Pilot update(int id, Pilot pilot) {
+	public Pilot update(Integer id, Pilot pilot) {
 		Pilot currentPilot = pilotRepository.findById(id);
 
 		if (currentPilot == null)
@@ -76,7 +76,7 @@ public class PilotService implements IService<Pilot> {
 	}
 
 	@Override
-	public Pilot find(int id) {
+	public Pilot find(Integer id) {
 		Pilot pilot = pilotRepository.findById(id);
 
 		if (pilot == null)

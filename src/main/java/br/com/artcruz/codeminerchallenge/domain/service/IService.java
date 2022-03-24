@@ -9,9 +9,9 @@ public interface IService<T> {
 
 	public T save(T obj);
 	
-	public T update(int id, T obj);
+	public T update(Integer id, T obj);
 
-	public T find(int id);
+	public T find(Integer id);
 	
 	public List<T> list();
 	

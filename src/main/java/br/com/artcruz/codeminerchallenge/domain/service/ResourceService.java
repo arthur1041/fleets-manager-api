@@ -34,7 +34,7 @@ public class ResourceService implements IService<Resource> {
 	}
 
 	@Override
-	public Resource update(int id, Resource resource) {
+	public Resource update(Integer id, Resource resource) {
 		Resource currentResource = resourceRepository.findById(id);
 		
 		if(currentResource == null)
@@ -62,7 +62,7 @@ public class ResourceService implements IService<Resource> {
 	}
 
 	@Override
-	public Resource find(int id) {
+	public Resource find(Integer id) {
 		Resource resource = resourceRepository.findById(id);
 		
 		if(resource == null)
