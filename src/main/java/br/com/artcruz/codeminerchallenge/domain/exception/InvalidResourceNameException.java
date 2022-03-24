@@ -11,3 +11,4 @@ public class InvalidResourceNameException extends RuntimeException {
 		super("Invalid resource name"); 
 	}
 }
+ 

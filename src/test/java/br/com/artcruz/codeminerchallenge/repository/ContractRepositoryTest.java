@@ -14,6 +14,7 @@ import br.com.artcruz.codeminerchallenge.domain.enums.PlanetEnum;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Contract;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Resource;
 import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
+import br.com.artcruz.codeminerchallenge.infrastructure.repository.ContractRepositoryImpl;
 
 /**
  * @author: Arthur Cruz
@@ -35,6 +36,12 @@ class ContractRepositoryTest {
 		assertTrue(contractRepository.list().size() > 0);
 	}
 
+	@Test
+	public void listNotAccomplishedContracts() {
+		assertTrue(((ContractRepositoryImpl) contractRepository).listNotAccomplishedContracts().size() > 0);
+	}
+	
+	
 	@Test
 	public void create() {
 		Contract contract = new Contract();

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -48,4 +49,11 @@ public class ContractRepositoryImpl implements IRepository<Contract> {
 		entityManager.remove(contract);
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Contract> listNotAccomplishedContracts() {
+		Query q = entityManager.createQuery("from Contract c where c.accomplished is false", Contract.class);
+		
+		
+		return (List<Contract>) q.getResultList();
+	}
 }

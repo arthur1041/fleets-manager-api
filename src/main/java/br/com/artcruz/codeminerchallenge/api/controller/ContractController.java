@@ -19,6 +19,7 @@ import br.com.artcruz.codeminerchallenge.domain.exception.EmptyAttributeExceptio
 import br.com.artcruz.codeminerchallenge.domain.exception.EntityNotFoundException;
 import br.com.artcruz.codeminerchallenge.domain.exception.InvalidPlanetNameException;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Contract;
+import br.com.artcruz.codeminerchallenge.domain.service.ContractService;
 import br.com.artcruz.codeminerchallenge.domain.service.IService;
 import br.com.artcruz.codeminerchallenge.util.Utils;
 
@@ -35,6 +36,19 @@ public class ContractController {
 		return contractService.list();
 	}
 
+	//4. List open contracts
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping("/open")
+	public List<Contract> listOpen() {
+		return ((ContractService) contractService).listOpenContracts();
+	}
+	
+	//5. List open contracts
+	@GetMapping("/accept/{contractId}")
+	public ResponseEntity<?> acceptContract(@PathVariable("contractId") Integer id){
+		return null;
+	}
+	
 	@GetMapping("/{contractId}")
 	public ResponseEntity<?> find(@PathVariable("contractId") Integer id) {
 		try {
@@ -47,6 +61,7 @@ public class ContractController {
 		}
 	}
 
+	//2. Publish transport contracts
 	@PostMapping
 	public ResponseEntity<?> add(@RequestBody Contract contract) {
 		final HttpHeaders httpHeaders = new HttpHeaders();

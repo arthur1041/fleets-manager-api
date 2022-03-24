@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +35,8 @@ class PilotRepositoryTest {
 	public void create() {
 		Pilot pilot = new Pilot();
 
-		try {
-			pilot.setBirthDate(sdf.parse("29/06/2002"));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		pilot.setBirthDate(LocalDate.now());
+
 		pilot.setCredits(1000000);
 		pilot.setLocationPlanet("Mars");
 		pilot.setName("Peter Parker");

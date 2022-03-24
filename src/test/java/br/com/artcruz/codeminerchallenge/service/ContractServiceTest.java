@@ -14,6 +14,7 @@ import br.com.artcruz.codeminerchallenge.domain.model.entity.Ship;
 import br.com.artcruz.codeminerchallenge.domain.enums.PlanetEnum;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Contract;
 import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
+import br.com.artcruz.codeminerchallenge.domain.service.ContractService;
 import br.com.artcruz.codeminerchallenge.domain.service.IService;
 
 /**
@@ -42,7 +43,7 @@ class ContractServiceTest {
 		contract.setShip(shipService.find(1));
 		contract.setDescription("abc");
 		contract.setDestinationPlanet(PlanetEnum.AQUA.label);
-		contract.setOriginPlanet(PlanetEnum.ANDAVARI.label);
+		contract.setOriginPlanet(PlanetEnum.ANDVARI.label);
 		contract.setValue(100);
 		
 		Contract contractDb = contractService.save(contract);
@@ -64,6 +65,11 @@ class ContractServiceTest {
 	@Test
 	public void list() {
 		assertTrue(contractService.list().size() > 0);
+	}
+	
+	@Test
+	public void listOpenContracts() {
+		assertTrue(((ContractService) contractService).listOpenContracts().size() > 0);
 	}
 	
 	@Test

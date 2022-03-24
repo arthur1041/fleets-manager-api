@@ -4,7 +4,7 @@ package br.com.artcruz.codeminerchallenge.domain.enums;
  * @author: Arthur Cruz
  */
 public enum PlanetEnum {
-	ANDAVARI("Andavari"),
+	ANDVARI("Andvari"),
 	DEMETER("Demeter"),
 	AQUA("Aqua"),
 	CALAS("Calas");

@@ -13,6 +13,7 @@ import br.com.artcruz.codeminerchallenge.domain.model.entity.Contract;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Pilot;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Ship;
 import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
+import br.com.artcruz.codeminerchallenge.infrastructure.repository.ContractRepositoryImpl;
 import br.com.artcruz.codeminerchallenge.util.Utils;
 
 /**
@@ -67,6 +68,9 @@ public class ContractService implements IService<Contract> {
 		
 		if(contract.getValue() == null)
 			throw new EmptyAttributeException("value");
+		
+		contract.setAccepted(false);
+		contract.setAccomplished(false);
 		
 		return contractRepository.createOrUpdate(contract);
 	}
@@ -133,7 +137,7 @@ public class ContractService implements IService<Contract> {
 	public List<Contract> list() {
 		return contractRepository.list();
 	}
-
+	
 	@Override
 	public void remove(int id) {
 		try {
@@ -144,4 +148,10 @@ public class ContractService implements IService<Contract> {
 		
 	}
 
+	public List<Contract> listOpenContracts() {
+		return ((ContractRepositoryImpl) contractRepository).listNotAccomplishedContracts();
+	}
+	
+	
+	
 }

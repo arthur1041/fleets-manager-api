@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ class PilotServiceTest {
 		Pilot pilot = new Pilot();
 
 		pilot.setName("Adam");
-		pilot.setBirthDate(new Date());
+		pilot.setBirthDate(LocalDate.now());
 		pilot.setCredits(1000);
 		pilot.setLocationPlanet("Aqua");
 		pilot.setPilotCertification("0000000");

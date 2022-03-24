@@ -1,8 +1,9 @@
 package br.com.artcruz.codeminerchallenge.domain.model.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -48,7 +49,7 @@ public class Pilot implements Serializable {
 	 * */
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "birth_date", nullable = false)
-	private Date birthDate;
+	private LocalDate birthDate;
 
 	/**
 	 * amount of money owned by the pilot
@@ -62,12 +63,10 @@ public class Pilot implements Serializable {
 	private String locationPlanet;
 	
 	@JsonIgnore
-//	@JsonManagedReference(value = "pilot-ship")
 	@OneToMany(mappedBy = "pilot", cascade = CascadeType.ALL)
 	private List<Ship> ships = new ArrayList<Ship>();
 	
 	@JsonIgnore
-//	@JsonBackReference(value = "pilot-contract")
 	@OneToMany(mappedBy = "pilot", cascade = CascadeType.ALL)
 	private List<Contract> contracts = new ArrayList<Contract>();
 	
@@ -95,16 +94,22 @@ public class Pilot implements Serializable {
 		this.name = name;
 	}
 
-	public Date getBirthDate() {
+	public LocalDate getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(Date birthdate) {
+	public void setBirthDate(LocalDate birthdate) {
 		this.birthDate = birthdate;
 	}
 	
 	public int getAge() {
-		return 0;
+		LocalDate currentDate = LocalDate.now();
+		
+		if ((birthDate != null) && (currentDate != null)) {
+            return Period.between(birthDate, currentDate).getYears();
+        } else {
+            return 0;
+        }
 	}
 
 	public Integer getCredits() {

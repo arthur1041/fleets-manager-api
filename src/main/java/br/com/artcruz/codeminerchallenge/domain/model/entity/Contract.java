@@ -56,10 +56,16 @@ public class Contract implements Serializable {
 	private String destinationPlanet;
 	
 	/**
-	 * represents if a contract is published or not
+	 * represents if a contract is accepted or not
 	 * */
 	@JsonIgnore
-	private Boolean published;
+	private Boolean accepted;
+	
+	/**
+	 * represents if a contract is accepted or not
+	 * */
+	@JsonIgnore
+	private Boolean accomplished;
 	
 	/**
 	 * quantity of credits offered as payment for the contract
@@ -139,12 +145,20 @@ public class Contract implements Serializable {
 		this.pilot = pilot;
 	}
 
-	public Boolean getPublished() {
-		return published;
+	public Boolean getAccepted() {
+		return accepted;
 	}
 
-	public void setPublished(Boolean published) {
-		this.published = published;
+	public void setAccepted(Boolean accepted) {
+		this.accepted = accepted;
+	}
+	
+	public Boolean getAccomplished() {
+		return accomplished;
+	}
+
+	public void setAccomplished(Boolean accomplished) {
+		this.accomplished = accomplished;
 	}
 
 	@Override

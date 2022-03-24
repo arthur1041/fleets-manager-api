@@ -9,7 +9,7 @@ import br.com.artcruz.codeminerchallenge.domain.enums.ResourceEnum;
 public class Utils {
 
 	public static boolean validatePlanetName(String name) {
-		if (PlanetEnum.ANDAVARI.label.equalsIgnoreCase(name) || PlanetEnum.AQUA.label.equalsIgnoreCase(name)
+		if (PlanetEnum.ANDVARI.label.equalsIgnoreCase(name) || PlanetEnum.AQUA.label.equalsIgnoreCase(name)
 				|| PlanetEnum.CALAS.label.equalsIgnoreCase(name) || PlanetEnum.DEMETER.label.equalsIgnoreCase(name))
 			return true;
 

@@ -1,7 +1,7 @@
 package br.com.artcruz.codeminerchallenge;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,11 +28,8 @@ class TablesGenerationTest {
 	public void testTablesCreation() {
 		Pilot pilot = new Pilot();
 
-		try {
-			pilot.setBirthDate(sdf.parse("29/06/2002"));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		pilot.setBirthDate(LocalDate.now());
+	
 		pilot.setCredits(1000000);
 		pilot.setLocationPlanet("Mars");
 		pilot.setName("Peter Parker");
