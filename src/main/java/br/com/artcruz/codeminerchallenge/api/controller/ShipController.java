@@ -18,28 +18,27 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.artcruz.codeminerchallenge.domain.exception.EmptyAttributeException;
 import br.com.artcruz.codeminerchallenge.domain.exception.EntityNotFoundException;
 import br.com.artcruz.codeminerchallenge.domain.exception.InvalidPlanetNameException;
-import br.com.artcruz.codeminerchallenge.domain.model.entity.Pilot;
+import br.com.artcruz.codeminerchallenge.domain.model.entity.Ship;
 import br.com.artcruz.codeminerchallenge.domain.service.IService;
 import br.com.artcruz.codeminerchallenge.util.Utils;
 
 @RestController
-@RequestMapping("/pilots")
-public class PilotController {
+@RequestMapping("/ships")
+public class ShipController {
 
 	@Autowired
-	private IService<Pilot> pilotService;
+	private IService<Ship> shipService;
 
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping
-	public List<Pilot> list() {
-		return pilotService.list();
+	public List<Ship> list() {
+		return shipService.list();
 	}
 
-	//1. Add pilots and their ships to the system.
-	@GetMapping("/{pilotId}")
-	public ResponseEntity<?> find(@PathVariable("pilotId") Integer id) {
+	@GetMapping("/{shipId}")
+	public ResponseEntity<?> find(@PathVariable("shipId") Integer id) {
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(pilotService.find(id));
+			return ResponseEntity.status(HttpStatus.OK).body(shipService.find(id));
 		} catch (EntityNotFoundException e) {
 			final HttpHeaders httpHeaders = new HttpHeaders();
 			httpHeaders.setContentType(MediaType.APPLICATION_JSON);
@@ -48,13 +47,13 @@ public class PilotController {
 		}
 	}
 
+	//1. Add pilots and their ships to the system.
 	@PostMapping
-	public ResponseEntity<?> add(@RequestBody Pilot pilot) {
+	public ResponseEntity<?> add(@RequestBody Ship ship) {
 		final HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-		
 		try {
-			return ResponseEntity.status(HttpStatus.CREATED).body(pilotService.save(pilot));
+			return ResponseEntity.status(HttpStatus.CREATED).body(shipService.save(ship));
 		} catch (InvalidPlanetNameException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(httpHeaders).body(Utils.getJsonBody("Message", e.getMessage()));
 		} catch (EmptyAttributeException e) {

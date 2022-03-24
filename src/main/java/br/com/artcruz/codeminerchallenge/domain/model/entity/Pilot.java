@@ -13,6 +13,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author: Arthur Cruz
  */
@@ -43,6 +46,7 @@ public class Pilot implements Serializable {
 	/**
 	 * pilot age
 	 * */
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "birth_date", nullable = false)
 	private Date birthDate;
 
@@ -57,17 +61,21 @@ public class Pilot implements Serializable {
 	@Column(name = "location_planet")
 	private String locationPlanet;
 	
+	@JsonIgnore
+//	@JsonManagedReference(value = "pilot-ship")
 	@OneToMany(mappedBy = "pilot", cascade = CascadeType.ALL)
-	private List<Ship> ships = new ArrayList<>();
+	private List<Ship> ships = new ArrayList<Ship>();
 	
+	@JsonIgnore
+//	@JsonBackReference(value = "pilot-contract")
 	@OneToMany(mappedBy = "pilot", cascade = CascadeType.ALL)
-	private List<Contract> contracts = new ArrayList<>();
+	private List<Contract> contracts = new ArrayList<Contract>();
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

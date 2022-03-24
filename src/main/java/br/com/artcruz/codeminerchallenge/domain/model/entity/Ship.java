@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author: Arthur Cruz
  */
@@ -51,14 +53,15 @@ public class Ship implements Serializable {
 	@JoinColumn(nullable = false)
 	private Pilot pilot;
 	
-	@OneToMany(mappedBy = "pilot", cascade = CascadeType.ALL)
+	@JsonIgnore
+	@OneToMany(mappedBy = "ship", cascade = CascadeType.ALL)
 	private List<Contract> contracts = new ArrayList<>();
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

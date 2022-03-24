@@ -13,6 +13,9 @@ import br.com.artcruz.codeminerchallenge.domain.model.entity.Resource;
 import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
 import br.com.artcruz.codeminerchallenge.util.Utils;
 
+/**
+ * @author: Arthur Cruz
+ */
 @Service
 public class ResourceService implements IService<Resource> {
 
@@ -66,7 +69,7 @@ public class ResourceService implements IService<Resource> {
 			throw new EntityNotFoundException(Resource.class, id);
 		
 		
-		return resourceRepository.createOrUpdate(resource);
+		return resource;
 	}
 
 	@Override

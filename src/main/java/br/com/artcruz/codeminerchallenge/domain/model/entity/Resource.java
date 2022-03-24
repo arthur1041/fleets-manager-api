@@ -38,15 +38,16 @@ public class Resource implements Serializable {
 	private Integer weight;
 
 	
+//	@JsonBackReference(value = "resource-contract")
 	@ManyToOne
 	@JoinColumn
 	private Contract contract;
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

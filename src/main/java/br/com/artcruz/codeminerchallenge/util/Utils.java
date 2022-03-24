@@ -3,6 +3,9 @@ package br.com.artcruz.codeminerchallenge.util;
 import br.com.artcruz.codeminerchallenge.domain.enums.PlanetEnum;
 import br.com.artcruz.codeminerchallenge.domain.enums.ResourceEnum;
 
+/**
+ * @author: Arthur Cruz
+ */
 public class Utils {
 
 	public static boolean validatePlanetName(String name) {
@@ -19,6 +22,10 @@ public class Utils {
 			return true;
 
 		return false;
+	}
+	
+	public static String getJsonBody(String attribute, String value) {
+		return "{ \"" + attribute + "\": \"" + value + "\" }";
 	}
 
 }

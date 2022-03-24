@@ -16,6 +16,9 @@ import br.com.artcruz.codeminerchallenge.domain.model.entity.Contract;
 import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
 import br.com.artcruz.codeminerchallenge.domain.service.IService;
 
+/**
+ * @author: Arthur Cruz
+ */
 @SpringBootTest
 class ContractServiceTest {
 

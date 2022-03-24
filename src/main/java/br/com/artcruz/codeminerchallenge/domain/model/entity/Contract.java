@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author: Arthur Cruz
  */
@@ -37,6 +39,7 @@ public class Contract implements Serializable {
 	/**
 	 * the actual cargo to be transported
 	 * */
+	@JsonIgnore
 	@OneToMany(mappedBy = "contract")
 	private List<Resource> payload = new ArrayList<Resource>();
 	
@@ -53,6 +56,12 @@ public class Contract implements Serializable {
 	private String destinationPlanet;
 	
 	/**
+	 * represents if a contract is published or not
+	 * */
+	@JsonIgnore
+	private Boolean published;
+	
+	/**
 	 * quantity of credits offered as payment for the contract
 	 * */
 	@Column(nullable = false)
@@ -66,11 +75,11 @@ public class Contract implements Serializable {
 	@JoinColumn(nullable = false)
 	private Pilot pilot;
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -128,6 +137,14 @@ public class Contract implements Serializable {
 
 	public void setPilot(Pilot pilot) {
 		this.pilot = pilot;
+	}
+
+	public Boolean getPublished() {
+		return published;
+	}
+
+	public void setPublished(Boolean published) {
+		this.published = published;
 	}
 
 	@Override

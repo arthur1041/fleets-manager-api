@@ -6,12 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import br.com.artcruz.codeminerchallenge.domain.exception.EmptyAttributeException;
 import br.com.artcruz.codeminerchallenge.domain.exception.EntityNotFoundException;
 import br.com.artcruz.codeminerchallenge.domain.exception.InvalidPlanetNameException;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Pilot;
 import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
 import br.com.artcruz.codeminerchallenge.util.Utils;
 
+/**
+ * @author: Arthur Cruz
+ */
 @Service
 public class PilotService implements IService<Pilot> {
 
@@ -22,7 +26,23 @@ public class PilotService implements IService<Pilot> {
 	public Pilot save(Pilot pilot) {
 		if (!Utils.validatePlanetName(pilot.getLocationPlanet()))
 			throw new InvalidPlanetNameException();
+		
+		if(pilot.getPilotCertification() == null)
+			throw new EmptyAttributeException("pilotCertification");
+		
+		if(pilot.getPilotCertification().isEmpty())
+			throw new EmptyAttributeException("pilotCertification");
+		
+		if(pilot.getName() == null)
+			throw new EmptyAttributeException("name");
+		
+		if(pilot.getName().isEmpty())
+			throw new EmptyAttributeException("name");
 
+		if(pilot.getBirthDate() == null)
+			throw new EmptyAttributeException("birthDate");
+		
+		
 		return pilotRepository.createOrUpdate(pilot);
 	}
 

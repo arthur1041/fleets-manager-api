@@ -2,6 +2,9 @@ package br.com.artcruz.codeminerchallenge.domain.service;
 
 import java.util.List;
 
+/**
+ * @author: Arthur Cruz
+ */
 public interface IService<T> {
 
 	public T save(T obj);

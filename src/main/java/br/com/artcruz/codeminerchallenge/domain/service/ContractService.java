@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import br.com.artcruz.codeminerchallenge.domain.exception.EmptyAttributeException;
 import br.com.artcruz.codeminerchallenge.domain.exception.EntityNotFoundException;
 import br.com.artcruz.codeminerchallenge.domain.exception.InvalidPlanetNameException;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Contract;
@@ -14,6 +15,9 @@ import br.com.artcruz.codeminerchallenge.domain.model.entity.Ship;
 import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
 import br.com.artcruz.codeminerchallenge.util.Utils;
 
+/**
+ * @author: Arthur Cruz
+ */
 @Service
 public class ContractService implements IService<Contract> {
 
@@ -36,6 +40,33 @@ public class ContractService implements IService<Contract> {
 		if(!Utils.validatePlanetName(contract.getOriginPlanet())) {
 			throw new InvalidPlanetNameException();
 		}
+		
+		if(contract.getPilot() == null)
+			throw new EmptyAttributeException("pilot id");
+		
+		if(contract.getPilot().getId() == null)
+			throw new EmptyAttributeException("pilot id");
+		
+		if(contract.getPilot().getId() == 0)
+			throw new EmptyAttributeException("pilot id");
+		
+		if(contract.getShip() == null)
+			throw new EmptyAttributeException("ship id");
+		
+		if(contract.getShip().getId() == null)
+			throw new EmptyAttributeException("ship id");
+		
+		if(contract.getShip().getId() == 0)
+			throw new EmptyAttributeException("ship id");
+		
+		if(contract.getDescription() == null)
+			throw new EmptyAttributeException("description");
+		
+		if(contract.getDescription().isEmpty())
+			throw new EmptyAttributeException("description");
+		
+		if(contract.getValue() == null)
+			throw new EmptyAttributeException("value");
 		
 		return contractRepository.createOrUpdate(contract);
 	}

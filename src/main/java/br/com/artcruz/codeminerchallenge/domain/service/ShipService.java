@@ -6,11 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import br.com.artcruz.codeminerchallenge.domain.exception.EmptyAttributeException;
 import br.com.artcruz.codeminerchallenge.domain.exception.EntityNotFoundException;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Pilot;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Ship;
 import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
 
+/**
+ * @author: Arthur Cruz
+ */
 @Service
 public class ShipService implements IService<Ship>{
 
@@ -22,6 +26,18 @@ public class ShipService implements IService<Ship>{
 	
 	@Override
 	public Ship save(Ship ship) {
+		if(ship.getFuelCapacity() == null)
+			throw new EmptyAttributeException("fuelCapacity");
+		
+		if(ship.getPilot() == null)
+			throw new EmptyAttributeException("pilot id");
+		
+		if(ship.getPilot().getId() == null)
+			throw new EmptyAttributeException("pilot id");
+		
+		if(ship.getPilot().getId() == 0)
+			throw new EmptyAttributeException("pilot id");
+			
 		return shipRepository.createOrUpdate(ship);
 	}
 
