@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 import br.com.artcruz.codeminerchallenge.domain.exception.EntityNotFoundException;
+import br.com.artcruz.codeminerchallenge.domain.exception.InvalidPlanetNameException;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Pilot;
 import br.com.artcruz.codeminerchallenge.domain.repository.Repository;
+import br.com.artcruz.codeminerchallenge.util.Utils;
 
 public class PilotService implements Service<Pilot>{
 
@@ -32,8 +34,11 @@ public class PilotService implements Service<Pilot>{
 		if(pilot.getCredits() != null)
 			currentPilot.setCredits(pilot.getCredits());
 		
-		if(pilot.getLocationPlanet() != null) 
+		if(pilot.getLocationPlanet() != null) {
+			if(!Utils.validatePlanetName(pilot.getLocationPlanet()))
+				throw new InvalidPlanetNameException();
 			currentPilot.setLocationPlanet(pilot.getLocationPlanet());
+		}
 		
 		if(pilot.getName() != null) 
 			currentPilot.setName(pilot.getName());

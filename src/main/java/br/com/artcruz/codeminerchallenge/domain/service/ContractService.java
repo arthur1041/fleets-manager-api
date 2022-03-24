@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 import br.com.artcruz.codeminerchallenge.domain.exception.EntityNotFoundException;
+import br.com.artcruz.codeminerchallenge.domain.exception.InvalidPlanetNameException;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Contract;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Pilot;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Ship;
 import br.com.artcruz.codeminerchallenge.domain.repository.Repository;
+import br.com.artcruz.codeminerchallenge.util.Utils;
 
 public class ContractService implements Service<Contract> {
 
@@ -56,11 +58,19 @@ public class ContractService implements Service<Contract> {
 		if(contract.getDescription() != null)
 			currentContract.setDescription(contract.getDescription());
 		
-		if(contract.getDestinationPlanet() != null)
+		if(contract.getDestinationPlanet() != null) {
+			if(!Utils.validatePlanetName(contract.getDestinationPlanet()))
+				throw new InvalidPlanetNameException();
+
 			currentContract.setDestinationPlanet(contract.getDestinationPlanet());
+		}
 		
-		if(contract.getOriginPlanet() != null)
+		if(contract.getOriginPlanet() != null) {
+			if(!Utils.validatePlanetName(contract.getOriginPlanet()))
+				throw new InvalidPlanetNameException();
+
 			currentContract.setOriginPlanet(contract.getOriginPlanet());
+		}
 		
 		if(contract.getValue() != null)
 			currentContract.setValue(contract.getValue());

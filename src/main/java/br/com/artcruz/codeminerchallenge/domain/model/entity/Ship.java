@@ -27,7 +27,7 @@ public class Ship implements Serializable {
 	 * */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	/**
 	 * ships have a maximum capacity of fuel

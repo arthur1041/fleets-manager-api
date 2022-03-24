@@ -26,7 +26,7 @@ public class Pilot implements Serializable {
 	 * */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	
 	/**
 	 * the identification document permission to fly a ship

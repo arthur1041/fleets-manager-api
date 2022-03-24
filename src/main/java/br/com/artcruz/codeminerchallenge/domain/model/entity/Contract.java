@@ -26,7 +26,7 @@ public class Contract implements Serializable {
 	 * */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	
 	/**
 	 * a description of what that contract is for. (e.g water and food to calas)

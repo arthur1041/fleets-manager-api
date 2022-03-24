@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import br.com.artcruz.codeminerchallenge.domain.enums.ResourceNameEnum;
+import br.com.artcruz.codeminerchallenge.domain.enums.ResourceEnum;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Resource;
 import br.com.artcruz.codeminerchallenge.domain.repository.Repository;
 
@@ -32,7 +32,7 @@ class ResourceRepositoryTest {
 		Resource resource = new Resource();
 
 		
-		resource.setName(ResourceNameEnum.MINERALS.label);
+		resource.setName(ResourceEnum.MINERALS.label);
 		resource.setWeight(100);
 
 		Resource resourceDb = resourceRepository.createOrUpdate(resource);
@@ -45,11 +45,11 @@ class ResourceRepositoryTest {
 	public void update() {
 		Resource resource = resourceRepository.findById(1);
 		
-		resource.setName(ResourceNameEnum.FOOD.label);
+		resource.setName(ResourceEnum.FOOD.label);
 		
 		resourceRepository.createOrUpdate(resource);
 		
-		assertEquals(resourceRepository.findById(1).getName(), ResourceNameEnum.FOOD.label);
+		assertEquals(resourceRepository.findById(1).getName(), ResourceEnum.FOOD.label);
 	}
 	
 	@Test

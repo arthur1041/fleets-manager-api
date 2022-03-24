@@ -23,7 +23,7 @@ public class Resource implements Serializable {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	/**
 	 * how many tons of that resource
@@ -65,6 +65,14 @@ public class Resource implements Serializable {
 	public void setWeight(Integer weight) {
 		this.weight = weight;
 	}
+	
+	public Contract getContract() {
+		return contract;
+	}
+
+	public void setContract(Contract contract) {
+		this.contract = contract;
+	}
 
 	@Override
 	public int hashCode() {
@@ -90,7 +98,7 @@ public class Resource implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Resource [id=" + id + ", name=" + name + ", weight=" + weight + "]";
+		return "Resource [id=" + id + ", name=" + name + ", weight=" + weight + ", contract=" + contract + "]";
 	}
 	
 }
