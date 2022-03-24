@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author: Arthur Cruz
  */
@@ -37,10 +39,9 @@ public class Resource implements Serializable {
 	@Column(nullable = false)
 	private Integer weight;
 
-	
-//	@JsonBackReference(value = "resource-contract")
+	@JsonIgnore
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(nullable = false)
 	private Contract contract;
 	
 	public Integer getId() {

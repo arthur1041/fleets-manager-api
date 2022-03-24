@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import br.com.artcruz.codeminerchallenge.domain.model.entity.Ship;
 import br.com.artcruz.codeminerchallenge.domain.enums.PlanetEnum;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Contract;
+import br.com.artcruz.codeminerchallenge.domain.model.entity.Pilot;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Resource;
 import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
 import br.com.artcruz.codeminerchallenge.infrastructure.repository.ContractRepositoryImpl;
@@ -26,7 +26,7 @@ class ContractRepositoryTest {
 	private IRepository<Contract> contractRepository;
 	
 	@Autowired
-	private IRepository<Ship> shipRepository;
+	private IRepository<Pilot> pilotRepository;
 
 	@Autowired
 	private IRepository<Resource> resourceRepository;
@@ -46,10 +46,7 @@ class ContractRepositoryTest {
 	public void create() {
 		Contract contract = new Contract();
 
-		Ship ship = shipRepository.findById(2); 
-		
-		contract.setPilot(ship.getPilot());
-		contract.setShip(ship);
+		contract.setPilot(pilotRepository.findById(2));
 		contract.setDescription("blablabla");
 		contract.setOriginPlanet(PlanetEnum.DEMETER.label);
 		contract.setDestinationPlanet(PlanetEnum.AQUA.label);
@@ -66,14 +63,11 @@ class ContractRepositoryTest {
 	public void update() {
 		Contract contract = contractRepository.findById(1);
 		
-		Ship ship = shipRepository.findById(2);
-		
-		contract.setShip(ship);
-		contract.setPilot(ship.getPilot());
+		contract.setPilot(pilotRepository.findById(2));
 		
 		contractRepository.createOrUpdate(contract);
 		
-		assertEquals(contractRepository.findById(1).getPilot().getId(), ship.getPilot().getId());
+		assertEquals(contractRepository.findById(1).getPilot().getId(), pilotRepository.findById(2).getId());
 	}
 	
 	@Test

@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,8 +40,7 @@ public class Contract implements Serializable {
 	/**
 	 * the actual cargo to be transported
 	 * */
-	@JsonIgnore
-	@OneToMany(mappedBy = "contract")
+	@OneToMany(mappedBy = "contract", fetch = FetchType.EAGER)
 	private List<Resource> payload = new ArrayList<Resource>();
 	
 	/**
@@ -72,10 +72,6 @@ public class Contract implements Serializable {
 	 * */
 	@Column(nullable = false)
 	private Integer value;
-
-	@ManyToOne(optional = false)
-	@JoinColumn(nullable = false)
-	private Ship ship;
 	
 	@ManyToOne(optional = false)
 	@JoinColumn(nullable = false)
@@ -129,14 +125,6 @@ public class Contract implements Serializable {
 		this.value = value;
 	}
 
-	public Ship getShip() {
-		return ship;
-	}
-
-	public void setShip(Ship ship) {
-		this.ship = ship;
-	}
-
 	public Pilot getPilot() {
 		return pilot;
 	}
@@ -145,7 +133,7 @@ public class Contract implements Serializable {
 		this.pilot = pilot;
 	}
 
-	public Boolean getAccepted() {
+	public Boolean isAccepted() {
 		return accepted;
 	}
 
@@ -159,6 +147,15 @@ public class Contract implements Serializable {
 
 	public void setAccomplished(Boolean accomplished) {
 		this.accomplished = accomplished;
+	}
+	
+	public int getResourcesTotalWeight() {
+		int totalWeight = 0;
+		for (Resource resource : payload) {
+			totalWeight += resource.getWeight();
+		}
+		
+		return totalWeight;
 	}
 
 	@Override

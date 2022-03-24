@@ -1,10 +1,7 @@
 package br.com.artcruz.codeminerchallenge.domain.model.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,9 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @author: Arthur Cruz
@@ -53,10 +47,6 @@ public class Ship implements Serializable {
 	@JoinColumn(nullable = false)
 	private Pilot pilot;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "ship", cascade = CascadeType.ALL)
-	private List<Contract> contracts = new ArrayList<>();
-	
 	public Integer getId() {
 		return id;
 	}
@@ -84,6 +74,10 @@ public class Ship implements Serializable {
 			this.fuelLevel = fuelLevel;
 	}
 
+	public void addFuel(Integer fuel) {
+		setFuelCapacity(this.fuelLevel + fuel);
+	}
+	
 	public Integer getWeightCapacity() {
 		return weightCapacity;
 	}
@@ -98,14 +92,6 @@ public class Ship implements Serializable {
 
 	public void setPilot(Pilot pilot) {
 		this.pilot = pilot;
-	}
-
-	public List<Contract> getContracts() {
-		return contracts;
-	}
-
-	public void setContracts(List<Contract> contracts) {
-		this.contracts = contracts;
 	}
 
 	@Override

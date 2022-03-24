@@ -11,7 +11,6 @@ import br.com.artcruz.codeminerchallenge.domain.exception.EntityNotFoundExceptio
 import br.com.artcruz.codeminerchallenge.domain.exception.InvalidPlanetNameException;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Contract;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Pilot;
-import br.com.artcruz.codeminerchallenge.domain.model.entity.Ship;
 import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
 import br.com.artcruz.codeminerchallenge.infrastructure.repository.ContractRepositoryImpl;
 import br.com.artcruz.codeminerchallenge.util.Utils;
@@ -27,11 +26,7 @@ public class ContractService implements IService<Contract> {
 	
 	@Autowired
 	private IRepository<Pilot> pilotRepository;
-	
-	@Autowired
-	private IRepository<Ship> shipRepository;
-	
-	
+		
 	@Override
 	public Contract save(Contract contract) {
 		if(!Utils.validatePlanetName(contract.getDestinationPlanet())) {
@@ -50,15 +45,6 @@ public class ContractService implements IService<Contract> {
 		
 		if(contract.getPilot().getId() == 0)
 			throw new EmptyAttributeException("pilot id");
-		
-		if(contract.getShip() == null)
-			throw new EmptyAttributeException("ship id");
-		
-		if(contract.getShip().getId() == null)
-			throw new EmptyAttributeException("ship id");
-		
-		if(contract.getShip().getId() == 0)
-			throw new EmptyAttributeException("ship id");
 		
 		if(contract.getDescription() == null)
 			throw new EmptyAttributeException("description");
@@ -89,15 +75,6 @@ public class ContractService implements IService<Contract> {
 				throw new EntityNotFoundException(Pilot.class, id);
 			
 			currentContract.setPilot(pilot);
-		}
-		
-		if(contract.getShip() != null) {
-			Ship ship = shipRepository.findById(contract.getShip().getId());
-			
-			if(ship == null)
-				throw new EntityNotFoundException(Ship.class, id);
-			
-			currentContract.setShip(ship);
 		}
 		
 		if(contract.getDescription() != null)
@@ -152,6 +129,13 @@ public class ContractService implements IService<Contract> {
 		return ((ContractRepositoryImpl) contractRepository).listNotAccomplishedContracts();
 	}
 	
+	public Contract acceptContract(int contractId) {
 	
-	
+		Contract contract = find(contractId);
+		
+		contract.setAccepted(true);
+		
+		return contractRepository.createOrUpdate(contract);
+
+	}
 }

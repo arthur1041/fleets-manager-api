@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -43,18 +44,27 @@ public class ContractController {
 		return ((ContractService) contractService).listOpenContracts();
 	}
 	
-	//5. List open contracts
-	@GetMapping("/accept/{contractId}")
+	//5. Accept transport contracts
+	@PutMapping("/accept/{contractId}")
 	public ResponseEntity<?> acceptContract(@PathVariable("contractId") Integer id){
-		return null;
+		final HttpHeaders httpHeaders = new HttpHeaders();
+		try {
+			httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+			((ContractService) contractService).acceptContract(id);
+			return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(Utils.getJsonBody("Message", "Contract accepet succesfully! Now you can execute it."));
+		} catch (EntityNotFoundException e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(httpHeaders)
+					.body(Utils.getJsonBody("message", e.getMessage()));
+		}
+		
 	}
 	
 	@GetMapping("/{contractId}")
 	public ResponseEntity<?> find(@PathVariable("contractId") Integer id) {
+		final HttpHeaders httpHeaders = new HttpHeaders();
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(contractService.find(id));
 		} catch (EntityNotFoundException e) {
-			final HttpHeaders httpHeaders = new HttpHeaders();
 			httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(httpHeaders)
 					.body(Utils.getJsonBody("message", e.getMessage()));

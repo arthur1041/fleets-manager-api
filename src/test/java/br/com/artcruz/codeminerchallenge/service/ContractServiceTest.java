@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Pilot;
-import br.com.artcruz.codeminerchallenge.domain.model.entity.Ship;
 import br.com.artcruz.codeminerchallenge.domain.enums.PlanetEnum;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Contract;
 import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
@@ -30,9 +29,6 @@ class ContractServiceTest {
 	private IService<Pilot> pilotService;
 	
 	@Autowired
-	private IService<Ship> shipService;
-	
-	@Autowired
 	private IRepository<Contract> contractRepository;
 
 	@Test
@@ -40,7 +36,6 @@ class ContractServiceTest {
 		Contract contract = new Contract();
 	
 		contract.setPilot(pilotService.find(1));
-		contract.setShip(shipService.find(1));
 		contract.setDescription("abc");
 		contract.setDestinationPlanet(PlanetEnum.AQUA.label);
 		contract.setOriginPlanet(PlanetEnum.ANDVARI.label);

@@ -120,6 +120,10 @@ public class Pilot implements Serializable {
 		this.credits = credits;
 	}
 
+	public void addCredits(Integer credits) {
+		this.credits += credits;
+	}
+	
 	public String getLocationPlanet() {
 		return locationPlanet;
 	}

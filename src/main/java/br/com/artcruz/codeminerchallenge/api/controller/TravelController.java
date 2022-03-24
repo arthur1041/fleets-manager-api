@@ -9,6 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,13 +32,13 @@ public class TravelController {
 	private TravelService travelService;
 
 	//3. Travel between planets
-	@GetMapping("/from/{idFrom}/to/{idTo}/withpilot/{idPilot}")
+	@PutMapping("/from/{idFrom}/to/{idTo}/withpilot/{idPilot}")
 	public ResponseEntity<?> freeTravel(@PathVariable("idFrom") Integer idFrom, @PathVariable("idTo") Integer idTo,
 			@PathVariable("idPilot") Integer idPilot) {
 		final HttpHeaders httpHeaders = new HttpHeaders();
 
 		try {
-			travelService.doFreeTravel(idFrom, idTo, idPilot);
+			travelService.doTravel(idFrom, idTo, idPilot);
 		} catch (InvalidTravelDestinationException e) {
 			httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(httpHeaders)

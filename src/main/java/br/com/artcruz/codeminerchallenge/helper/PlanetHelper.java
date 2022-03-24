@@ -41,7 +41,7 @@ public class PlanetHelper {
 		return rh;
 	}
 
-	public static int getPlanetByName(String name) {
+	public static int getPlanetIdByName(String name) {
 		Map<Integer, String> pMap = getPlanetsMap();
 	
 		int index = 0;
