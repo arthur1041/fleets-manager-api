@@ -1,7 +1,6 @@
 package br.com.artcruz.codeminerchallenge.api.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -23,7 +22,6 @@ import br.com.artcruz.codeminerchallenge.domain.exception.InvalidPlanetNameExcep
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Contract;
 import br.com.artcruz.codeminerchallenge.domain.service.ContractService;
 import br.com.artcruz.codeminerchallenge.domain.service.IService;
-import br.com.artcruz.codeminerchallenge.helper.PlanetHelper;
 import br.com.artcruz.codeminerchallenge.util.Utils;
 
 @RestController

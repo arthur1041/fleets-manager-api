@@ -1,4 +1,4 @@
-package br.com.artcruz.codeminerchallenge.helper;
+package br.com.artcruz.codeminerchallenge.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,9 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import br.com.artcruz.codeminerchallenge.domain.enums.PlanetEnum;
+import br.com.artcruz.codeminerchallenge.helper.RouteHelper;
 
-public class PlanetHelper {
+public class PlanetUtils {
 
 	final static int ANDVARI = 1;
 	final static int DEMETER = 2;

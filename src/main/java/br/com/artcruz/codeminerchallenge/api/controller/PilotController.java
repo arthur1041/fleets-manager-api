@@ -47,7 +47,7 @@ public class PilotController {
 					.body(Utils.getJsonBody("message", e.getMessage()));
 		}
 	}
-
+	
 	@PostMapping
 	public ResponseEntity<?> add(@RequestBody Pilot pilot) {
 		final HttpHeaders httpHeaders = new HttpHeaders();

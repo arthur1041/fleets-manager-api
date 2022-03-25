@@ -16,8 +16,8 @@ import br.com.artcruz.codeminerchallenge.domain.exception.PilotTooYoungException
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Contract;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Pilot;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Ship;
-import br.com.artcruz.codeminerchallenge.helper.PlanetHelper;
 import br.com.artcruz.codeminerchallenge.helper.RouteHelper;
+import br.com.artcruz.codeminerchallenge.util.PlanetUtils;
 
 @Service
 public class TravelService {
@@ -35,7 +35,7 @@ public class TravelService {
 			throw new InvalidTravelDestinationException();
 		}
 
-		List<RouteHelper> routeHelper = PlanetHelper.getRoutesInfo();
+		List<RouteHelper> routeHelper = PlanetUtils.getRoutesInfo();
 
 		int index = routeHelper.indexOf(route);
 
@@ -68,7 +68,7 @@ public class TravelService {
 
 			shipWithMostFuel.setFuelLevel(route.getFuelCost());
 
-			Map<Integer, String> planets = PlanetHelper.getPlanetsMap();
+			Map<Integer, String> planets = PlanetUtils.getPlanetsMap();
 
 			shipService.update(shipWithMostFuel.getId(), shipWithMostFuel);
 			pilot.setLocationPlanet(planets.get(idTo));
@@ -83,7 +83,7 @@ public class TravelService {
 			throw new InvalidTravelDestinationException();
 		}
 
-		List<RouteHelper> routeHelper = PlanetHelper.getRoutesInfo();
+		List<RouteHelper> routeHelper = PlanetUtils.getRoutesInfo();
 
 		int index = routeHelper.indexOf(route);
 
@@ -129,7 +129,7 @@ public class TravelService {
 
 			shipWithMostFuel.addFuel(-route.getFuelCost());
 
-			Map<Integer, String> planets = PlanetHelper.getPlanetsMap();
+			Map<Integer, String> planets = PlanetUtils.getPlanetsMap();
 
 			shipService.update(shipWithMostFuel.getId(), shipWithMostFuel);
 			pilot.setLocationPlanet(planets.get(idTo));
@@ -138,8 +138,8 @@ public class TravelService {
 	}
 
 	public void doContractualTravel(Contract contract) {
-		int idPlanetFrom = PlanetHelper.getPlanetIdByName(contract.getOriginPlanet());
-		int idPlanetTo = PlanetHelper.getPlanetIdByName(contract.getDestinationPlanet());
+		int idPlanetFrom = PlanetUtils.getPlanetIdByName(contract.getOriginPlanet());
+		int idPlanetTo = PlanetUtils.getPlanetIdByName(contract.getDestinationPlanet());
 		doTravel(idPlanetFrom, idPlanetTo, contract.getPilot().getId(), contract.getResourcesTotalWeight());
 	}
 

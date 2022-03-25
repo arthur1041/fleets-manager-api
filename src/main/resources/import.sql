@@ -17,6 +17,12 @@ insert into contract(id, description, destination_planet, origin_planet, value, 
 
 insert into contract(id, description, destination_planet, origin_planet, value, pilot_id, accepted, accomplished) values (3, 'A very important travel', 'Demeter', 'Aqua', 100000, 1, false, false);
 
+insert into contract(id, description, destination_planet, origin_planet, value, pilot_id, accepted, accomplished) values (4, 'A very important travel', 'Aqua', 'Demeter', 100000, 2, true, true);
+insert into contract(id, description, destination_planet, origin_planet, value, pilot_id, accepted, accomplished) values (5, 'A very important travel', 'Demeter', 'Calas', 100000, 2, true, true);
+insert into contract(id, description, destination_planet, origin_planet, value, pilot_id, accepted, accomplished) values (6, 'A very important travel', 'Calas', 'Aqua', 100000, 2, true, true);
+insert into contract(id, description, destination_planet, origin_planet, value, pilot_id, accepted, accomplished) values (7, 'A very important travel', 'Andvari', 'Calas', 100000, 2, true, true);
+insert into contract(id, description, destination_planet, origin_planet, value, pilot_id, accepted, accomplished) values (8, 'A very important travel', 'Calas', 'Andvari', 100000, 2, true, true);
+
 insert into resource(id, name, weight, contract_id) values (1, 'MINERALS', 10, 1);
 insert into resource(id, name, weight, contract_id) values (2, 'FOOD', 100, 1);
 insert into resource(id, name, weight, contract_id) values (3, 'WATER', 50, 2);
@@ -26,3 +32,13 @@ insert into resource(id, name, weight, contract_id) values (6, 'WATER', 15, 2);
 insert into resource(id, name, weight, contract_id) values (7, 'MINERALS', 25, 1);
 insert into resource(id, name, weight, contract_id) values (8, 'FOOD', 30, 1);
 insert into resource(id, name, weight, contract_id) values (9, 'WATER', 42, 2);
+
+
+insert into resource(id, name, weight, contract_id) values (10, 'FOOD', 9, 4);
+insert into resource(id, name, weight, contract_id) values (11, 'WATER', 15, 5);
+insert into resource(id, name, weight, contract_id) values (12, 'MINERALS', 25, 6);
+insert into resource(id, name, weight, contract_id) values (13, 'FOOD', 30, 7);
+insert into resource(id, name, weight, contract_id) values (14, 'WATER', 42, 8);
+insert into resource(id, name, weight, contract_id) values (15, 'MINERALS', 25, 7);
+insert into resource(id, name, weight, contract_id) values (16, 'FOOD', 30, 8);
+insert into resource(id, name, weight, contract_id) values (17, 'WATER', 42, 7);

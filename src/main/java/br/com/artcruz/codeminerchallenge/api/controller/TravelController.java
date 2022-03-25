@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import br.com.artcruz.codeminerchallenge.domain.service.TravelService;
-import br.com.artcruz.codeminerchallenge.helper.PlanetHelper;
+import br.com.artcruz.codeminerchallenge.util.PlanetUtils;
 import br.com.artcruz.codeminerchallenge.util.Utils;
 
 @RestController
@@ -38,7 +38,7 @@ public class TravelController {
 					.body(Utils.getJsonBody("Message", e.getMessage()));
 		} 
 
-		Map<Integer, String> planets = PlanetHelper.getPlanetsMap();
+		Map<Integer, String> planets = PlanetUtils.getPlanetsMap();
 
 		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 		return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(Utils.getJsonBody("Message",
