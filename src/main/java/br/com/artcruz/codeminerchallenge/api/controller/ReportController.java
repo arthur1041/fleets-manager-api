@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.artcruz.codeminerchallenge.domain.service.ReportsService;
+import br.com.artcruz.codeminerchallenge.domain.service.ReportService;
+import br.com.artcruz.codeminerchallenge.helper.PilotPercentageHelper;
 import br.com.artcruz.codeminerchallenge.helper.PlanetWeightReportHelper;
 import br.com.artcruz.codeminerchallenge.util.Utils;
 
@@ -20,21 +21,36 @@ import br.com.artcruz.codeminerchallenge.util.Utils;
 public class ReportController {
 
 	@Autowired
-	private ReportsService reportsService;
+	private ReportService reportService;
 
 	@GetMapping("/weightmovimentation")
-	public ResponseEntity<?> teste() {
+	public ResponseEntity<?> weightmov() {
 		final HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
 		try {
-			Map<String, PlanetWeightReportHelper> mapTeste = reportsService.sentAndReceivedTotals();
+			Map<String, PlanetWeightReportHelper> map = reportService.sentAndReceivedTotals();
 
-			return ResponseEntity.status(HttpStatus.OK).body(mapTeste);
+			return ResponseEntity.status(HttpStatus.OK).body(map);
 		} catch (RuntimeException e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).headers(httpHeaders)
 					.body(Utils.getJsonBody("Message", e.getMessage()));
 		}
 	}
 
+	@GetMapping("/pilotspercentages")
+	public ResponseEntity<?> pilotsstats() {
+		final HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+
+		try {
+			Map<Integer, PilotPercentageHelper> map = reportService.pilotTravelsStats();
+
+			return ResponseEntity.status(HttpStatus.OK).body(map);
+		} catch (RuntimeException e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).headers(httpHeaders)
+					.body(Utils.getJsonBody("Message", e.getMessage()));
+		}
+	}
+	
 }

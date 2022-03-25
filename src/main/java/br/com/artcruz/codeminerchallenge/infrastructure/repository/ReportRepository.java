@@ -19,7 +19,7 @@ import br.com.artcruz.codeminerchallenge.helper.PilotPercentageHelper;
 import br.com.artcruz.codeminerchallenge.helper.PlanetWeightReportHelper;
 
 @Component
-public class ReportsRepository {
+public class ReportRepository {
 
 	@PersistenceContext
 	private EntityManager entityManager;

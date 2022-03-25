@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import br.com.artcruz.codeminerchallenge.infrastructure.repository.ReportsRepository;
+import br.com.artcruz.codeminerchallenge.infrastructure.repository.ReportRepository;
 
 /**
  * @author: Arthur Cruz
@@ -14,15 +14,15 @@ import br.com.artcruz.codeminerchallenge.infrastructure.repository.ReportsReposi
 class ReportsRepositoryTest {
 
 	@Autowired
-	private ReportsRepository reportsRepository;
+	private ReportRepository reportRepository;
 	
 	@Test
 	public void sentAndReceivedTotals() {
-		reportsRepository.sentAndReceivedTotals();
+		reportRepository.sentAndReceivedTotals();
 	}
 	
 	@Test
 	public void pilotTravelsStats() {
-		reportsRepository.pilotTravelsStats();
+		reportRepository.pilotTravelsStats();
 	}
 }
