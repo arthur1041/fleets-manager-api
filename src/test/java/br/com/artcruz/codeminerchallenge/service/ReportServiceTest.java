@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.artcruz.codeminerchallenge.domain.service.ReportsService;
+import br.com.artcruz.codeminerchallenge.infrastructure.repository.ReportsRepository;
 
 /**
  * @author: Arthur Cruz
@@ -16,8 +17,11 @@ class ReportServiceTest {
 	@Autowired
 	private ReportsService reportsService;
 	
+	@Autowired
+	private ReportsRepository reportsRepository;
+	
 	@Test
 	public void sentAndReceivedTotals() {
-		reportsService.sentAndReceivedTotals();
+		reportsRepository.sentAndReceivedTotals();
 	}
 }

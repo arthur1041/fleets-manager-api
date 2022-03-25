@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.artcruz.codeminerchallenge.domain.enums.PlanetEnum;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Contract;
+import br.com.artcruz.codeminerchallenge.domain.model.entity.Resource;
 import br.com.artcruz.codeminerchallenge.helper.PlanetWeightReportHelper;
 
 @Service
@@ -19,43 +20,46 @@ public class ReportsService {
 	
 	public Map<String, PlanetWeightReportHelper> sentAndReceivedTotals() {
 		
+		
 		List<Contract> contracts = contractService.list();
 		
-		Map<String, PlanetWeightReportHelper> sentAndReceivedMap = new TreeMap<>();
+		Map<String, Map<String, PlanetWeightReportHelper>> sentAndReceivedMap = new TreeMap<>();
 		
-		int sumRecAndvari = 0, sumSentAndvari = 0;
-		int sumRecAqua = 0, sumSentAqua = 0;
-		int sumRecCalas = 0, sumSentCalas = 0;
-		int sumRecDemeter = 0, sumSentDemeter = 0;
+	
+		int sumRecAndvariFood = 0, sumSentAndvariFood = 0;
+		int sumRecAndvariWater = 0, sumSentAndvariWater = 0;
+		int sumRecAndvariMinerals = 0, sumSentAndvariMinerals = 0;
+		int sumRecCalasFood = 0, sumSentCalasFood = 0;
+		int sumRecCalasWater = 0, sumSentCalasWater = 0;
+		int sumRecCalasMinerals = 0, sumSentCalasMinerals = 0;
+		int sumRecDemeterFood = 0, sumSentDemeterFood = 0;
+		int sumRecDemeterWater = 0, sumSentDemeterWater = 0;
+		int sumRecDemeterMinerals = 0, sumSentDemeterMinerals = 0;
+		int sumRecAquaFood = 0, sumSentAquaFood = 0;
+		int sumRecAquaWater = 0, sumSentAquaWater = 0;
+		int sumRecAquaMinerals = 0, sumSentAquaMinerals = 0;
+
 		
-		for (Contract contract : contracts) {
-			if(PlanetEnum.ANDVARI.label.equalsIgnoreCase(contract.getDestinationPlanet()))
-				sumRecAndvari = contract.getResourcesTotalWeight();
-			if(PlanetEnum.AQUA.label.equalsIgnoreCase(contract.getDestinationPlanet()))
-				sumRecAqua = contract.getResourcesTotalWeight();
-			if(PlanetEnum.CALAS.label.equalsIgnoreCase(contract.getDestinationPlanet()))
-				sumRecCalas = contract.getResourcesTotalWeight();
-			if(PlanetEnum.DEMETER.label.equalsIgnoreCase(contract.getDestinationPlanet()))
-				sumRecDemeter = contract.getResourcesTotalWeight();
+		for (Contract contract : contracts) {		
+			
+			if(sentAndReceivedMap.containsKey(contract.getOriginPlanet())) {
+				
+			};
+			
+			if(PlanetEnum.ANDVARI.label.equalsIgnoreCase(contract.getDestinationPlanet())) {
+				for (Resource resource : contract.getPayload()) {
+					
+				}
+			}
+			if(PlanetEnum.AQUA.label.equalsIgnoreCase(contract.getDestinationPlanet()));
+			if(PlanetEnum.CALAS.label.equalsIgnoreCase(contract.getDestinationPlanet()));
+			if(PlanetEnum.DEMETER.label.equalsIgnoreCase(contract.getDestinationPlanet()));
 		}
+		return null;
 		
-		for (Contract contract : contracts) {
-			if(PlanetEnum.ANDVARI.label.equalsIgnoreCase(contract.getOriginPlanet()))
-				sumSentAndvari = contract.getResourcesTotalWeight();
-			if(PlanetEnum.AQUA.label.equalsIgnoreCase(contract.getOriginPlanet()))
-				sumSentAqua = contract.getResourcesTotalWeight();
-			if(PlanetEnum.CALAS.label.equalsIgnoreCase(contract.getOriginPlanet()))
-				sumSentCalas = contract.getResourcesTotalWeight();
-			if(PlanetEnum.DEMETER.label.equalsIgnoreCase(contract.getOriginPlanet()))
-				sumSentDemeter = contract.getResourcesTotalWeight();
-		}
 		
-		sentAndReceivedMap.put(PlanetEnum.ANDVARI.label, new PlanetWeightReportHelper(sumRecAndvari, sumSentAndvari));
-		sentAndReceivedMap.put(PlanetEnum.AQUA.label, new PlanetWeightReportHelper(sumRecAqua, sumSentAqua));
-		sentAndReceivedMap.put(PlanetEnum.CALAS.label, new PlanetWeightReportHelper(sumRecCalas, sumSentCalas));
-		sentAndReceivedMap.put(PlanetEnum.DEMETER.label, new PlanetWeightReportHelper(sumRecDemeter, sumSentDemeter));
 		
-		return sentAndReceivedMap;
+//		return sentAndReceivedMap;
 	}
 	
 }

@@ -1,6 +1,8 @@
 package br.com.artcruz.codeminerchallenge.api.controller;
 
+import java.util.AbstractMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,12 +21,13 @@ public class ReportController {
 	@Autowired
 	private ReportsService reportsService;
 	
-	@GetMapping("/weightmov")
+	@GetMapping("/weightmovimentation")
 	public ResponseEntity<?> teste() {
-			
+//		Entry<String, PlanetWeightReportHelper> abc = new AbstractMap.SimpleEntry<String, PlanetWeightReportHelper>("set", new PlanetWeightReportHelper(100, 110));
+		
 		Map<String, PlanetWeightReportHelper> mapTeste = reportsService.sentAndReceivedTotals();
 		
-		return ResponseEntity.status(HttpStatus.OK).body(mapTeste);
+		return null;
 	}
 	
 	
