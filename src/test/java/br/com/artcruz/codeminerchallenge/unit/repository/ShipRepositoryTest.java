@@ -1,4 +1,4 @@
-package br.com.artcruz.codeminerchallenge.repository;
+package br.com.artcruz.codeminerchallenge.unit.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -6,21 +6,24 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Pilot;
+import br.com.artcruz.codeminerchallenge.domain.model.entity.Ship;
 import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
 
 /**
  * @author: Arthur Cruz
  */
 @SpringBootTest
-class PilotRepositoryTest {
+class ShipRepositoryTest {
 
+	@Autowired
+	private IRepository<Ship> shipRepository;
+	
 	@Autowired
 	private IRepository<Pilot> pilotRepository;
 
@@ -28,45 +31,43 @@ class PilotRepositoryTest {
 
 	@Test
 	public void list() {
-		assertTrue(pilotRepository.list().size() > 0);
+		assertTrue(shipRepository.list().size() > 0);
 	}
 
 	@Test
 	public void create() {
-		Pilot pilot = new Pilot();
+		Ship ship = new Ship();
 
-		pilot.setBirthDate(LocalDate.now());
+		
+		ship.setFuelCapacity(1000);
+		ship.setFuelLevel(1000);
+		ship.setPilot(pilotRepository.findById(2));
 
-		pilot.setCredits(1000000);
-		pilot.setLocationPlanet("Mars");
-		pilot.setName("Peter Parker");
-		pilot.setPilotCertification("0000000");
+		Ship shipDb = shipRepository.createOrUpdate(ship);
 
-		Pilot pilotDb = pilotRepository.createOrUpdate(pilot);
-
-		assertNotNull(pilotDb);
+		assertNotNull(shipDb);
 
 	}
 
 	@Test
 	public void update() {
-		Pilot pilot = pilotRepository.findById(1);
+		Ship ship = shipRepository.findById(1);
 		
-		pilot.setName("Mark");
+		ship.setPilot(pilotRepository.findById(1));
 		
-		pilotRepository.createOrUpdate(pilot);
+		shipRepository.createOrUpdate(ship);
 		
-		assertEquals(pilotRepository.findById(1).getName(), "Mark");
+		assertEquals(shipRepository.findById(1).getPilot().getId(), 1);
 	}
 	
 	@Test
 	public void findById() {
-		assertNotNull(pilotRepository.findById(1));
+		assertNotNull(shipRepository.findById(1));
 	}
 	
 	@Test
 	public void delete() {
-		pilotRepository.delete(1);
-		assertNull(pilotRepository.findById(1));
+		shipRepository.delete(1);
+		assertNull(shipRepository.findById(1));
 	}
 }

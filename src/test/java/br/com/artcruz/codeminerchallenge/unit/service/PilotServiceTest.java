@@ -1,4 +1,4 @@
-package br.com.artcruz.codeminerchallenge.service;
+package br.com.artcruz.codeminerchallenge.unit.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

@@ -1,4 +1,4 @@
-package br.com.artcruz.codeminerchallenge;
+package br.com.artcruz.codeminerchallenge.unit;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;

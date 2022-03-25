@@ -1,4 +1,4 @@
-package br.com.artcruz.codeminerchallenge.repository;
+package br.com.artcruz.codeminerchallenge.unit.repository;
 
 
 import org.junit.jupiter.api.Test;

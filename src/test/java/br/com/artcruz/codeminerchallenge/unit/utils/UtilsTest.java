@@ -1,4 +1,4 @@
-package br.com.artcruz.codeminerchallenge.utils;
+package br.com.artcruz.codeminerchallenge.unit.utils;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
