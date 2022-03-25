@@ -45,7 +45,7 @@ public class TransactionRepositoryImpl implements IRepository<Transaction> {
 			throw new EmptyResultDataAccessException(1);
 		}
 		
-		entityManager.remove(id);		
+		entityManager.remove(transaction);		
 	}
 
 }

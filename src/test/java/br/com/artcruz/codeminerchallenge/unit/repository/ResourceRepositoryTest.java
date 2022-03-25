@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.artcruz.codeminerchallenge.domain.enums.ResourceEnum;
+import br.com.artcruz.codeminerchallenge.domain.model.entity.Contract;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Resource;
 import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
 
@@ -22,6 +23,9 @@ class ResourceRepositoryTest {
 	@Autowired
 	private IRepository<Resource> resourceRepository;
 
+	@Autowired
+	private IRepository<Contract> contractRepository;
+	
 	@Test
 	public void list() {
 		assertTrue(resourceRepository.list().size() > 0);
@@ -34,6 +38,7 @@ class ResourceRepositoryTest {
 		
 		resource.setName(ResourceEnum.MINERALS.label);
 		resource.setWeight(100);
+		resource.setContract(contractRepository.findById(1));
 
 		Resource resourceDb = resourceRepository.createOrUpdate(resource);
 

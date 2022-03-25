@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -40,7 +41,7 @@ public class Contract implements Serializable {
 	/**
 	 * the actual cargo to be transported
 	 * */
-	@OneToMany(mappedBy = "contract", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "contract", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private List<Resource> payload = new ArrayList<Resource>();
 	
 	/**

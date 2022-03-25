@@ -116,9 +116,4 @@ public class Resource implements Serializable {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Resource [id=" + id + ", name=" + name + ", weight=" + weight + ", contract=" + contract + "]";
-	}
-	
 }

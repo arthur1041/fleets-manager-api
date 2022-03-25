@@ -63,11 +63,11 @@ public class Pilot implements Serializable {
 	private String locationPlanet;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "pilot", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "pilot", cascade = CascadeType.REMOVE)
 	private List<Ship> ships = new ArrayList<Ship>();
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "pilot", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "pilot", cascade = CascadeType.REMOVE)
 	private List<Contract> contracts = new ArrayList<Contract>();
 	
 	public Integer getId() {
