@@ -19,6 +19,9 @@ import br.com.artcruz.codeminerchallenge.domain.model.entity.Ship;
 import br.com.artcruz.codeminerchallenge.helper.RouteHelper;
 import br.com.artcruz.codeminerchallenge.util.PlanetUtils;
 
+/**
+ * @author: Arthur Cruz
+ */
 @Service
 public class TravelService {
 

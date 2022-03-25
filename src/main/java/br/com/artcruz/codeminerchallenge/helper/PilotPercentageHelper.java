@@ -6,6 +6,9 @@ import java.text.DecimalFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * @author: Arthur Cruz
+ */
 public class PilotPercentageHelper implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -24,6 +24,9 @@ import br.com.artcruz.codeminerchallenge.domain.service.ContractService;
 import br.com.artcruz.codeminerchallenge.domain.service.IService;
 import br.com.artcruz.codeminerchallenge.util.Utils;
 
+/**
+ * @author: Arthur Cruz
+ */
 @RestController
 @RequestMapping("/contracts")
 public class ContractController {

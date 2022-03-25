@@ -22,6 +22,9 @@ import br.com.artcruz.codeminerchallenge.domain.model.entity.Pilot;
 import br.com.artcruz.codeminerchallenge.domain.service.IService;
 import br.com.artcruz.codeminerchallenge.util.Utils;
 
+/**
+ * @author: Arthur Cruz
+ */
 @RestController
 @RequestMapping("/pilots")
 public class PilotController {

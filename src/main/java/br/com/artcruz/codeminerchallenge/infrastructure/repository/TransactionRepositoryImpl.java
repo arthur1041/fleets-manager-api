@@ -12,6 +12,9 @@ import org.springframework.stereotype.Component;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Transaction;
 import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
 
+/**
+ * @author: Arthur Cruz
+ */
 @Component
 public class TransactionRepositoryImpl implements IRepository<Transaction> {
 

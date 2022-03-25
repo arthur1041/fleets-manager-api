@@ -10,6 +10,9 @@ import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * @author: Arthur Cruz
+ */
 @Entity
 public class Transaction implements Serializable {
 

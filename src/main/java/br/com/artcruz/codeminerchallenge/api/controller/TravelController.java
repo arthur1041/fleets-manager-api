@@ -17,6 +17,9 @@ import br.com.artcruz.codeminerchallenge.domain.service.TravelService;
 import br.com.artcruz.codeminerchallenge.util.PlanetUtils;
 import br.com.artcruz.codeminerchallenge.util.Utils;
 
+/**
+ * @author: Arthur Cruz
+ */
 @RestController
 @RequestMapping("/travel")
 public class TravelController {

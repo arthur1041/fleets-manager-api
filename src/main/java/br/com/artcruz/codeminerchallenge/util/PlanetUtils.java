@@ -8,6 +8,9 @@ import java.util.TreeMap;
 import br.com.artcruz.codeminerchallenge.domain.enums.PlanetEnum;
 import br.com.artcruz.codeminerchallenge.helper.RouteHelper;
 
+/**
+ * @author: Arthur Cruz
+ */
 public class PlanetUtils {
 
 	final static int ANDVARI = 1;

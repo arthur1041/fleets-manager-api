@@ -5,6 +5,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.artcruz.codeminerchallenge.util.Utils;
 
+/**
+ * @author: Arthur Cruz
+ */
 @SpringBootTest
 public class UtilsTest {
 

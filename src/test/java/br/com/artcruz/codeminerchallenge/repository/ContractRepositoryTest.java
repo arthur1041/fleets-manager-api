@@ -41,7 +41,6 @@ class ContractRepositoryTest {
 		assertTrue(((ContractRepositoryImpl) contractRepository).listNotAccomplishedContracts().size() > 0);
 	}
 	
-	
 	@Test
 	public void create() {
 		Contract contract = new Contract();

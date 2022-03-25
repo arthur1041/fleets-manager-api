@@ -1,5 +1,8 @@
 package br.com.artcruz.codeminerchallenge.helper;
 
+/**
+ * @author: Arthur Cruz
+ */
 public class RouteHelper {
 
 	public RouteHelper() {

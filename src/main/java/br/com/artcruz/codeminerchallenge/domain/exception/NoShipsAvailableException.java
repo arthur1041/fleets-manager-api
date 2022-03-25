@@ -1,5 +1,8 @@
 package br.com.artcruz.codeminerchallenge.domain.exception;
 
+/**
+ * @author: Arthur Cruz
+ */
 public class NoShipsAvailableException extends RuntimeException{
 	/**
 	 * 

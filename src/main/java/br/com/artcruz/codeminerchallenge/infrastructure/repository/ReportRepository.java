@@ -18,6 +18,9 @@ import br.com.artcruz.codeminerchallenge.helper.MovHelper;
 import br.com.artcruz.codeminerchallenge.helper.PilotPercentageHelper;
 import br.com.artcruz.codeminerchallenge.helper.PlanetWeightReportHelper;
 
+/**
+ * @author: Arthur Cruz
+ */
 @Component
 public class ReportRepository {
 

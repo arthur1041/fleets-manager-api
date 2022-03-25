@@ -18,6 +18,9 @@ import br.com.artcruz.codeminerchallenge.helper.PilotPercentageHelper;
 import br.com.artcruz.codeminerchallenge.helper.PlanetWeightReportHelper;
 import br.com.artcruz.codeminerchallenge.util.Utils;
 
+/**
+ * @author: Arthur Cruz
+ */
 @RestController
 @RequestMapping("/reports")
 public class ReportController {

@@ -23,6 +23,9 @@ import br.com.artcruz.codeminerchallenge.domain.service.ShipService;
 import br.com.artcruz.codeminerchallenge.helper.RefuelBodyHelper;
 import br.com.artcruz.codeminerchallenge.util.Utils;
 
+/**
+ * @author: Arthur Cruz
+ */
 @RestController
 @RequestMapping("/ships")
 public class ShipController {
