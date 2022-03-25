@@ -260,7 +260,7 @@ message: string
 **Tip:** make mysql installation easier and quicker by using [Xampp](https://www.apachefriends.org/pt_br/index.html)  
 
 
-## Starting the aplication
+### Starting the aplication:
 Assuming that you installed all needed softwares, we can now proceed to executing the application:
 
 #### 1. Clone the project from github using "git clone"
