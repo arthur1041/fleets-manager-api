@@ -1,4 +1,4 @@
-package br.com.artcruz.codeminerchallenge.service;
+package br.com.artcruz.codeminerchallenge.repository;
 
 
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ import br.com.artcruz.codeminerchallenge.infrastructure.repository.ReportsReposi
  * @author: Arthur Cruz
  */
 @SpringBootTest
-class ReportServiceTest {
+class ReportsRepositoryTest {
 
 	@Autowired
 	private ReportsRepository reportsRepository;
@@ -19,5 +19,10 @@ class ReportServiceTest {
 	@Test
 	public void sentAndReceivedTotals() {
 		reportsRepository.sentAndReceivedTotals();
+	}
+	
+	@Test
+	public void pilotTravelsStats() {
+		reportsRepository.pilotTravelsStats();
 	}
 }
