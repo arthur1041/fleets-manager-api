@@ -54,7 +54,7 @@ public class ShipControllerTest {
 	public void add() throws Exception {
 		String jsonString = "{ \"fuelCapacity\": 100, \"fuelLevel\": 70, \"weightCapacity\": 100, \"pilot\": { \"id\": 1 } }";
 
-		mockMvc.perform(post("/ships").contentType(MediaType.APPLICATION_JSON).content(jsonString))
+		mockMvc.perform(post("/ships").contentType(MediaType.APPLICATION_JSON).content(jsonString)).andDo(print())
 				.andExpect(status().isCreated());
 	}
 }

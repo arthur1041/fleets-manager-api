@@ -54,7 +54,7 @@ public class PilotControllerTest {
 	public void add() throws Exception {
 		String jsonString = "{ \"pilotCertification\": \"0000000\", \"name\": \"Will\", \"birthDate\": \"1996-04-29\", \"credits\": 5000, \"locationPlanet\": \"Aqua\", \"age\": 10 }";
 
-		mockMvc.perform(post("/pilots").contentType(MediaType.APPLICATION_JSON).content(jsonString))
+		mockMvc.perform(post("/pilots").contentType(MediaType.APPLICATION_JSON).content(jsonString)).andDo(print())
 				.andExpect(status().isCreated());
 	}
 }
