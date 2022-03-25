@@ -272,7 +272,7 @@ Assuming that you installed all needed softwares, we can now proceed to executin
 #### 4.  Now all you need to do is run the application by doing the following: 
 ![Spring Tool Suite - starting app](https://i.imgur.com/hXovJpr.png)
 
-#### And *voilà*! Now the application should be up and running. Now you can starts to use the endpoints
+#### And *voilà*! Now the application should be up and running. Now you can start to use the endpoints
 
 ## Using the application's functionalities
 1. You can ddd pilots and their ships to the system by using these endpoints: **POST /pilots; POST /ships**
