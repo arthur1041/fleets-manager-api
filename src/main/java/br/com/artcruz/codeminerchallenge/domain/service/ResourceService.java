@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import br.com.artcruz.codeminerchallenge.domain.exception.EmptyAttributeException;
 import br.com.artcruz.codeminerchallenge.domain.exception.EntityNotFoundException;
 import br.com.artcruz.codeminerchallenge.domain.exception.InvalidResourceNameException;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Contract;
@@ -21,54 +22,66 @@ public class ResourceService implements IService<Resource> {
 
 	@Autowired
 	private IRepository<Resource> resourceRepository;
- 	
+
 	@Autowired
 	private IRepository<Contract> contractRepository;
-	
+
+	@Autowired
+	private IService<Contract> contractService;
+
 	@Override
 	public Resource save(Resource resource) {
-		if(!Utils.validateResourceName(resource.getName()))
+		if (!Utils.validateResourceName(resource.getName()))
 			throw new InvalidResourceNameException();
-		
+
+		if (resource.getContractId() == null)
+			throw new EmptyAttributeException("contract_id");
+
+		if (resource.getContractId() == 0)
+			throw new EmptyAttributeException("contract_id");
+
+		Contract contract = contractService.find(resource.getContractId());
+
+		resource.setContract(contract);
+
 		return resourceRepository.createOrUpdate(resource);
 	}
 
 	@Override
 	public Resource update(Integer id, Resource resource) {
 		Resource currentResource = resourceRepository.findById(id);
-		
-		if(currentResource == null)
+
+		if (currentResource == null)
 			throw new EntityNotFoundException(Resource.class, id);
-		
-		if(resource.getContract() != null) {
+
+		if (resource.getContract() != null) {
 			Contract contract = contractRepository.findById(id);
-			
-			if(contract == null)
+
+			if (contract == null)
 				throw new EntityNotFoundException(Contract.class, resource.getContract().getId());
 		}
-		
-		if(resource.getName() != null) {
-			if(!Utils.validateResourceName(resource.getName()))
+
+		if (resource.getName() != null) {
+			if (!Utils.validateResourceName(resource.getName()))
 				throw new InvalidResourceNameException();
-			
+
 			currentResource.setName(resource.getName());
 		}
-		
-		if(resource.getWeight() != null)
+
+		if (resource.getWeight() != null)
 			currentResource.setWeight(resource.getWeight());
-		
+
 		return resourceRepository.createOrUpdate(currentResource);
-		
+
 	}
 
 	@Override
 	public Resource find(Integer id) {
 		Resource resource = resourceRepository.findById(id);
-		
-		if(resource == null)
+
+		if (resource == null)
 			throw new EntityNotFoundException(Resource.class, id);
-		
-		
+
 		return resource;
 	}
 
@@ -84,9 +97,7 @@ public class ResourceService implements IService<Resource> {
 		} catch (EmptyResultDataAccessException e) {
 			throw new EntityNotFoundException(Resource.class, id);
 		}
-		
+
 	}
 
-	
-	
 }

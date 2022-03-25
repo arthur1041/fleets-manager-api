@@ -16,9 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.artcruz.codeminerchallenge.domain.exception.EmptyAttributeException;
-import br.com.artcruz.codeminerchallenge.domain.exception.EntityNotFoundException;
-import br.com.artcruz.codeminerchallenge.domain.exception.InvalidPlanetNameException;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Contract;
 import br.com.artcruz.codeminerchallenge.domain.service.ContractService;
 import br.com.artcruz.codeminerchallenge.domain.service.IService;
@@ -56,7 +53,7 @@ public class ContractController {
 			((ContractService) contractService).acceptContract(id);
 			return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders)
 					.body(Utils.getJsonBody("Message", "Contract accepet succesfully! Now you can execute it."));
-		} catch (EntityNotFoundException e) {
+		} catch (RuntimeException e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(httpHeaders)
 					.body(Utils.getJsonBody("message", e.getMessage()));
 		}
@@ -88,7 +85,7 @@ public class ContractController {
 		final HttpHeaders httpHeaders = new HttpHeaders();
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(contractService.find(id));
-		} catch (EntityNotFoundException e) {
+		} catch (RuntimeException e) {
 			httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(httpHeaders)
 					.body(Utils.getJsonBody("message", e.getMessage()));
@@ -102,10 +99,7 @@ public class ContractController {
 		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 		try {
 			return ResponseEntity.status(HttpStatus.CREATED).body(contractService.save(contract));
-		} catch (InvalidPlanetNameException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(httpHeaders)
-					.body(Utils.getJsonBody("Message", e.getMessage()));
-		} catch (EmptyAttributeException e) {
+		} catch (RuntimeException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(httpHeaders)
 					.body(Utils.getJsonBody("Message", e.getMessage()));
 		}

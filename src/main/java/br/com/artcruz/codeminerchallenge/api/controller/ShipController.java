@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.artcruz.codeminerchallenge.domain.exception.EntityNotFoundException;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Ship;
 import br.com.artcruz.codeminerchallenge.domain.service.IService;
 import br.com.artcruz.codeminerchallenge.domain.service.ShipService;
@@ -43,7 +42,7 @@ public class ShipController {
 	public ResponseEntity<?> find(@PathVariable("shipId") Integer id) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(shipService.find(id));
-		} catch (EntityNotFoundException e) {
+		} catch (RuntimeException e) {
 			final HttpHeaders httpHeaders = new HttpHeaders();
 			httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(httpHeaders)

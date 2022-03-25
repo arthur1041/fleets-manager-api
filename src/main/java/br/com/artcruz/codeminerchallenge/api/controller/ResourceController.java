@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.artcruz.codeminerchallenge.domain.model.entity.Pilot;
+import br.com.artcruz.codeminerchallenge.domain.model.entity.Resource;
 import br.com.artcruz.codeminerchallenge.domain.service.IService;
 import br.com.artcruz.codeminerchallenge.util.Utils;
 
@@ -23,23 +23,22 @@ import br.com.artcruz.codeminerchallenge.util.Utils;
  * @author: Arthur Cruz
  */
 @RestController
-@RequestMapping("/pilots")
-public class PilotController {
+@RequestMapping("/resources")
+public class ResourceController {
 
 	@Autowired
-	private IService<Pilot> pilotService;
+	private IService<Resource> resourceService;
 
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping
-	public List<Pilot> list() {
-		return pilotService.list();
+	public List<Resource> list() {
+		return resourceService.list();
 	}
 
-	//1. Add pilots and their ships to the system.
-	@GetMapping("/{pilotId}")
-	public ResponseEntity<?> find(@PathVariable("pilotId") Integer id) {
+	@GetMapping("/{resourceId}")
+	public ResponseEntity<?> find(@PathVariable("resourceId") Integer id) {
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(pilotService.find(id));
+			return ResponseEntity.status(HttpStatus.OK).body(resourceService.find(id));
 		} catch (RuntimeException e) {
 			final HttpHeaders httpHeaders = new HttpHeaders();
 			httpHeaders.setContentType(MediaType.APPLICATION_JSON);
@@ -49,12 +48,12 @@ public class PilotController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<?> add(@RequestBody Pilot pilot) {
+	public ResponseEntity<?> add(@RequestBody Resource resource) {
 		final HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 		
 		try {
-			return ResponseEntity.status(HttpStatus.CREATED).body(pilotService.save(pilot));
+			return ResponseEntity.status(HttpStatus.CREATED).body(resourceService.save(resource));
 		} catch (RuntimeException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(httpHeaders).body(Utils.getJsonBody("Message", e.getMessage()));
 		}

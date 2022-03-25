@@ -51,13 +51,13 @@ public class ContractService implements IService<Contract> {
 		}
 
 		if (contract.getPilot() == null)
-			throw new EmptyAttributeException("pilot id");
+			throw new EmptyAttributeException("pilot_id");
 
 		if (contract.getPilot().getId() == null)
-			throw new EmptyAttributeException("pilot id");
+			throw new EmptyAttributeException("pilot_id");
 
 		if (contract.getPilot().getId() == 0)
-			throw new EmptyAttributeException("pilot id");
+			throw new EmptyAttributeException("pilot_id");
 
 		if (contract.getDescription() == null)
 			throw new EmptyAttributeException("description");

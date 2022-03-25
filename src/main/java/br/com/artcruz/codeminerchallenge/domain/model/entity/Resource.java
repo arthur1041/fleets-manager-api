@@ -9,8 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author: Arthur Cruz
@@ -44,6 +46,10 @@ public class Resource implements Serializable {
 	@JoinColumn(nullable = false)
 	private Contract contract;
 	
+	@Transient
+	@JsonProperty("contract_id")
+	private Integer contractId;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -74,6 +80,18 @@ public class Resource implements Serializable {
 
 	public void setContract(Contract contract) {
 		this.contract = contract;
+	}
+
+	
+	public Integer getContractId() {
+		if(contract != null && contract.getId() != null && contract.getId() != 0)
+			contractId = contract.getId();
+	
+		return contractId;
+	}
+
+	public void setContractId(Integer contractId) {
+		this.contractId = contractId;
 	}
 
 	@Override
