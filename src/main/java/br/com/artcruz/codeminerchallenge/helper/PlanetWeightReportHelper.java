@@ -20,4 +20,9 @@ public class PlanetWeightReportHelper implements Serializable{
 	
 	public MovHelper sent;
 
+	@Override
+	public String toString() {
+		return "PlanetWeightReportHelper [received=" + received + ", sent=" + sent + "]";
+	}
+
 }

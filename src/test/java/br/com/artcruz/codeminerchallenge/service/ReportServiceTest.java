@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import br.com.artcruz.codeminerchallenge.domain.service.ReportsService;
 import br.com.artcruz.codeminerchallenge.infrastructure.repository.ReportsRepository;
 
 /**
@@ -14,9 +13,6 @@ import br.com.artcruz.codeminerchallenge.infrastructure.repository.ReportsReposi
 @SpringBootTest
 class ReportServiceTest {
 
-	@Autowired
-	private ReportsService reportsService;
-	
 	@Autowired
 	private ReportsRepository reportsRepository;
 	
