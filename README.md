@@ -1,4 +1,5 @@
 
+
 # API Documentation
 
 ## Endpoints
@@ -247,12 +248,17 @@ message: string
 
 # Running the application
 
-## In order to run the application you will need the following tooks:
-[Java JDK 11](https://www.oracle.com/br/java/technologies/javase/jdk11-archive-downloads.html) or newer
-[SpringToolSuite IDE 4 Eclipse version](https://spring.io/tools) (you may be able to run the solution using another IDE such as Eclipse, IntelliJ IDEA or Visual Studio Code, but it's strongly recommended that you use STSTool4)
-[Postman API Client](https://www.postman.com/product/api-client/) (not required, just good for testing)
-[MySql](https://dev.mysql.com/downloads/installer/) (version 10.4.22-MariaDB is recommended, because is the one that I used)
-**Tip:** make mysql installation easier and quicker by using [Xampp](https://www.apachefriends.org/pt_br/index.html)
+## In order to run the application you will need the following tools:
+[Java JDK 11](https://www.oracle.com/br/java/technologies/javase/jdk11-archive-downloads.html) or newer  
+
+[SpringToolSuite IDE 4 Eclipse version](https://spring.io/tools) (you may be able to run the solution using another IDE such as Eclipse, IntelliJ IDEA or Visual Studio Code, but it's strongly recommended that you use STSTool4)  
+
+[Postman API Client](https://www.postman.com/product/api-client/) (not required, just good for testing)  
+
+[MySql](https://dev.mysql.com/downloads/installer/) (version 10.4.22-MariaDB is recommended, because is the one that I used)  
+
+**Tip:** make mysql installation easier and quicker by using [Xampp](https://www.apachefriends.org/pt_br/index.html)  
+
 
 ## Starting the aplication
 Assuming that you installed all needed softwares, we can now proceed to executing the application:
