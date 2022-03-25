@@ -279,4 +279,8 @@ Assuming that you installed all needed softwares, we can now proceed to executin
 
 
 ## Notes
-Every time that the application is started the database is recreated, you can change it at /fleets-manager-api/src/main/resources/application.properties
+1. Every time that the application is started the database is recreated, you can change it at */fleets-manager-api/src/main/resources/application.properties*.
+2. The file  */fleets-manager-api/src/main/resources/import.sql* is loaded every time that the system is started and placeholder data is inserted in the database, if it doesn't load automatically for you, you can run it manually.
+
+
+**That's all, folks😁!**
