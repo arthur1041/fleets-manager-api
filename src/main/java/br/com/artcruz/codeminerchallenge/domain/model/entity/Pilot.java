@@ -135,7 +135,7 @@ public class Pilot implements Serializable {
 		if(!Utils.validatePlanetName(locationPlanet)) {
 			this.locationPlanet = PlanetEnum.ANDVARI.label;
 		} else {
-			this.locationPlanet = locationPlanet;
+			this.locationPlanet = locationPlanet != null ? locationPlanet.toLowerCase() : locationPlanet;
 		}
 	}
 
