@@ -248,7 +248,7 @@ message: string
 
 # Running the application
 
-## In order to run the application you will need the following tools:
+### In order to run the application you will need the following tools:
 [Java JDK 11](https://www.oracle.com/br/java/technologies/javase/jdk11-archive-downloads.html) or newer  
 
 [SpringToolSuite IDE 4 Eclipse version](https://spring.io/tools) (you may be able to run the solution using another IDE such as Eclipse, IntelliJ IDEA or Visual Studio Code, but it's strongly recommended that you use STSTool4)  
@@ -260,7 +260,7 @@ message: string
 **Tip:** make mysql installation easier and quicker by using [Xampp](https://www.apachefriends.org/pt_br/index.html)  
 
 
-## Starting the aplication
+### Starting the aplication:
 Assuming that you installed all needed softwares, we can now proceed to executing the application:
 
 #### 1. Clone the project from github using "git clone"
@@ -272,7 +272,7 @@ Assuming that you installed all needed softwares, we can now proceed to executin
 #### 4.  Now all you need to do is run the application by doing the following: 
 ![Spring Tool Suite - starting app](https://i.imgur.com/hXovJpr.png)
 
-#### And *voilà*! Now the application should be up and running. Now you can starts to use the endpoints
+#### And *voilà*! Now the application should be up and running. Now you can start to use the endpoints
 
 ## Using the application's functionalities
 1. You can ddd pilots and their ships to the system by using these endpoints: **POST /pilots; POST /ships**
