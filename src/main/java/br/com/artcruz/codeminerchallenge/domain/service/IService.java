@@ -15,6 +15,6 @@ public interface IService<T> {
 	
 	public List<T> list();
 	
-	public void remove(int id);
+	public void remove(Integer id);
 
 }

@@ -78,7 +78,7 @@ public class ResourceService implements IService<Resource> {
 	}
 
 	@Override
-	public void remove(int id) {
+	public void remove(Integer id) {
 		try {
 			resourceRepository.delete(id);
 		} catch (EmptyResultDataAccessException e) {

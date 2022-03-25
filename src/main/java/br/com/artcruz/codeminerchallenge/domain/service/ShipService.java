@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 
 import br.com.artcruz.codeminerchallenge.domain.exception.EmptyAttributeException;
 import br.com.artcruz.codeminerchallenge.domain.exception.EntityNotFoundException;
+import br.com.artcruz.codeminerchallenge.domain.exception.NotEnoughMoneyException;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Pilot;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Ship;
+import br.com.artcruz.codeminerchallenge.domain.model.entity.Transaction;
 import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
 
 /**
@@ -23,6 +25,12 @@ public class ShipService implements IService<Ship>{
 	
 	@Autowired
 	private IRepository<Pilot> pilotRepository;
+	
+	@Autowired
+	private IService<Pilot> pilotService;
+
+	@Autowired
+	private IRepository<Transaction> transactionRepository;
 	
 	@Override
 	public Ship save(Ship ship) {
@@ -82,13 +90,35 @@ public class ShipService implements IService<Ship>{
 	}
 
 	@Override
-	public void remove(int id) {
+	public void remove(Integer id) {
 		try {
 			shipRepository.delete(id);
 		} catch (EmptyResultDataAccessException e) {
 			throw new EntityNotFoundException(Ship.class, id);
 		}
 		
+	}
+	
+	public void refuel(Ship spaceship, Integer amount) {
+		Ship ship = shipRepository.findById(spaceship.getId());
+		
+		Integer price = 7*(amount);
+		Pilot pilot = ship.getPilot();
+		
+		if(pilot.getCredits()<price)
+			throw new NotEnoughMoneyException();
+		
+		ship.addFuel(amount);
+		
+		
+		pilot.addCredits(-price);
+		Transaction transaction = new Transaction();
+		
+		transaction.setDescription(pilot.getName() + " bought fuel");
+		transaction.setValue(Math.abs(price));
+		
+		pilotService.update(pilot.getId(), pilot);
+		transactionRepository.createOrUpdate(transaction);
 	}
 
 }

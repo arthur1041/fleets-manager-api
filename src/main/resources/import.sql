@@ -42,3 +42,11 @@ insert into resource(id, name, weight, contract_id) values (14, 'WATER', 42, 8);
 insert into resource(id, name, weight, contract_id) values (15, 'MINERALS', 25, 7);
 insert into resource(id, name, weight, contract_id) values (16, 'FOOD', 30, 8);
 insert into resource(id, name, weight, contract_id) values (17, 'WATER', 42, 7);
+
+
+INSERT INTO transaction (id, transaction_description,value) VALUES (1, 'John bought fuel',560);
+INSERT INTO transaction (id, transaction_description,value) VALUES (2, 'John bought fuel',350);
+INSERT INTO transaction (id, transaction_description,value) VALUES (3, 'Linda bought fuel',350);
+INSERT INTO transaction (id, transaction_description,value) VALUES (4, 'Linda bought fuel',350);
+INSERT INTO transaction (id, transaction_description,value) VALUES (5, 'Linda bought fuel',210);
+	

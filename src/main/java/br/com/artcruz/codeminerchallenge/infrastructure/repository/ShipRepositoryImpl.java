@@ -27,7 +27,7 @@ public class ShipRepositoryImpl implements IRepository<Ship> {
 	}
 
 	@Override
-	public Ship findById(int id) {
+	public Ship findById(Integer id) {
 		return entityManager.find(Ship.class, id);
 	}
 
@@ -39,7 +39,7 @@ public class ShipRepositoryImpl implements IRepository<Ship> {
 
 	@Override
 	@Transactional
-	public void delete(int id) {
+	public void delete(Integer id) {
 		Ship ship = findById(id);
 		if(ship == null) {
 			throw new EmptyResultDataAccessException(1);

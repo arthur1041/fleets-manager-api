@@ -13,6 +13,7 @@ import br.com.artcruz.codeminerchallenge.domain.model.entity.Pilot;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Ship;
 import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
 import br.com.artcruz.codeminerchallenge.domain.service.IService;
+import br.com.artcruz.codeminerchallenge.domain.service.ShipService;
 
 /**
  * @author: Arthur Cruz
@@ -69,6 +70,14 @@ class ShipServiceTest {
 		shipService.remove(1);
 		
 		assertNull(shipRepository.findById(1));
+	}
+	
+	@Test
+	public void refuel() {
+		Ship ship = shipService.find(1);
+		
+		((ShipService) shipService).refuel(ship, 80);
+				
 	}
 	
 }

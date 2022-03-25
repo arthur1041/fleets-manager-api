@@ -1,5 +1,6 @@
 package br.com.artcruz.codeminerchallenge.api.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.artcruz.codeminerchallenge.domain.model.entity.Transaction;
 import br.com.artcruz.codeminerchallenge.domain.service.ReportService;
 import br.com.artcruz.codeminerchallenge.helper.PilotPercentageHelper;
 import br.com.artcruz.codeminerchallenge.helper.PlanetWeightReportHelper;
@@ -47,6 +49,21 @@ public class ReportController {
 			Map<Integer, PilotPercentageHelper> map = reportService.pilotTravelsStats();
 
 			return ResponseEntity.status(HttpStatus.OK).body(map);
+		} catch (RuntimeException e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).headers(httpHeaders)
+					.body(Utils.getJsonBody("Message", e.getMessage()));
+		}
+	}
+	
+	@GetMapping("/transactions")
+	public ResponseEntity<?> transactions() {
+		final HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+
+		try {
+			List<Transaction> transactions = reportService.transactionHistory();
+
+			return ResponseEntity.status(HttpStatus.OK).body(transactions);
 		} catch (RuntimeException e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).headers(httpHeaders)
 					.body(Utils.getJsonBody("Message", e.getMessage()));

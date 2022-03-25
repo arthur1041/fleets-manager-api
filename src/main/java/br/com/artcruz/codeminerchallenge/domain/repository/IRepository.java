@@ -8,8 +8,8 @@ import java.util.List;
 public interface IRepository<T> {
 
 	List<T> list();
-	T findById(int id);
+	T findById(Integer id);
 	T createOrUpdate(T object);
-	void delete(int id);
+	void delete(Integer id);
 	
 }

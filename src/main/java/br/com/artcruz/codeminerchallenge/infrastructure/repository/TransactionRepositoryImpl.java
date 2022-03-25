@@ -9,43 +9,40 @@ import javax.transaction.Transactional;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 
-import br.com.artcruz.codeminerchallenge.domain.model.entity.Resource;
+import br.com.artcruz.codeminerchallenge.domain.model.entity.Transaction;
 import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
 
-/**
- * @author: Arthur Cruz
- */
 @Component
-public class ResourceRepositoryImpl implements IRepository<Resource> {
+public class TransactionRepositoryImpl implements IRepository<Transaction> {
 
 	@PersistenceContext
 	private EntityManager entityManager;
 	
 	@Override
-	public List<Resource> list() {
-		return entityManager.createQuery("from Resource", Resource.class).getResultList();
+	public List<Transaction> list() {
+		return entityManager.createQuery("from Transaction", Transaction.class).getResultList();
 	}
 
 	@Override
-	public Resource findById(Integer id) {
-		return entityManager.find(Resource.class, id);
+	public Transaction findById(Integer id) {
+		return entityManager.find(Transaction.class, id);
 	}
 
 	@Override
 	@Transactional
-	public Resource createOrUpdate(Resource resource) {
-		return entityManager.merge(resource);
+	public Transaction createOrUpdate(Transaction object) {
+		return entityManager.merge(object);
 	}
 
 	@Override
 	@Transactional
 	public void delete(Integer id) {
-		Resource resource = findById(id);
-		if(resource == null) {
+		Transaction transaction = findById(id);
+		if(transaction == null) {
 			throw new EmptyResultDataAccessException(1);
 		}
 		
-		entityManager.remove(resource);
+		entityManager.remove(id);		
 	}
 
 }

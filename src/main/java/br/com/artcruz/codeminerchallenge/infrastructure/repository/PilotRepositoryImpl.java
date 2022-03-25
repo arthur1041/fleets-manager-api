@@ -27,7 +27,7 @@ public class PilotRepositoryImpl implements IRepository<Pilot> {
 	}
 
 	@Override
-	public Pilot findById(int id) {
+	public Pilot findById(Integer id) {
 		return entityManager.find(Pilot.class, id);
 	}
 
@@ -39,7 +39,7 @@ public class PilotRepositoryImpl implements IRepository<Pilot> {
 
 	@Override
 	@Transactional
-	public void delete(int id) {
+	public void delete(Integer id) {
 		Pilot pilot = findById(id);
 		if(pilot == null) {
 			throw new EmptyResultDataAccessException(1);

@@ -28,7 +28,7 @@ public class ContractRepositoryImpl implements IRepository<Contract> {
 	}
 
 	@Override
-	public Contract findById(int id) {
+	public Contract findById(Integer id) {
 		return entityManager.find(Contract.class, id);
 	}
 
@@ -40,7 +40,7 @@ public class ContractRepositoryImpl implements IRepository<Contract> {
 
 	@Override
 	@Transactional
-	public void delete(int id) {
+	public void delete(Integer id) {
 		Contract contract = findById(id);
 		if(contract == null) {
 			throw new EmptyResultDataAccessException(1);

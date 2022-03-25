@@ -91,7 +91,7 @@ public class PilotService implements IService<Pilot> {
 	}
 
 	@Override
-	public void remove(int id) {
+	public void remove(Integer id) {
 		try {
 			pilotRepository.delete(id);
 		} catch (EmptyResultDataAccessException e) {

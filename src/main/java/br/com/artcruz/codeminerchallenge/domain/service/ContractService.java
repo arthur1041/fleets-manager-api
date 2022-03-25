@@ -13,6 +13,7 @@ import br.com.artcruz.codeminerchallenge.domain.exception.InvalidPlanetNameExcep
 import br.com.artcruz.codeminerchallenge.domain.exception.NoPayloadException;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Contract;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Pilot;
+import br.com.artcruz.codeminerchallenge.domain.model.entity.Transaction;
 import br.com.artcruz.codeminerchallenge.domain.repository.IRepository;
 import br.com.artcruz.codeminerchallenge.infrastructure.repository.ContractRepositoryImpl;
 import br.com.artcruz.codeminerchallenge.util.Utils;
@@ -28,6 +29,10 @@ public class ContractService implements IService<Contract> {
 
 	@Autowired
 	private IRepository<Pilot> pilotRepository;
+
+	@Autowired
+	private IRepository<Transaction> transactionRepository;
+
 
 	@Autowired
 	private IService<Pilot> pilotService;
@@ -124,7 +129,7 @@ public class ContractService implements IService<Contract> {
 	}
 
 	@Override
-	public void remove(int id) {
+	public void remove(Integer id) {
 		try {
 			contractRepository.delete(id);
 		} catch (EmptyResultDataAccessException e) {
@@ -165,9 +170,13 @@ public class ContractService implements IService<Contract> {
 
 		// 6. Grant credits to the pilot after fulfilling the contract
 		pilot.addCredits(contract.getValue());
-
+		
+		Transaction transaction = new Transaction();
+		transaction.setDescription(contract.getDescription() + " paid");
+		transaction.setValue(Math.abs(contract.getValue()));
+		
 		contractRepository.createOrUpdate(contract);
 		pilotService.update(pilot.getId(), pilot);
-
+		transactionRepository.createOrUpdate(transaction);
 	}
 }
