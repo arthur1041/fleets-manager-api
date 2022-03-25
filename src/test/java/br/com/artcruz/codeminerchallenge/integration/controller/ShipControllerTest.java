@@ -20,41 +20,41 @@ import br.com.artcruz.codeminerchallenge.domain.service.ReportService;
 import br.com.artcruz.codeminerchallenge.domain.service.TravelService;
 
 @WebMvcTest
-public class PilotControllerTest {
+public class ShipControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
 
 	@MockBean
-	private IService<Contract> contractService;
-
+	private IService<Ship> shipIService;
+	
+	@MockBean
+	private IService<Contract> contractIService;
+	
 	@MockBean
 	private IService<Pilot> pilotService;
 
 	@MockBean
 	private ReportService reportService;
-
-	@MockBean
-	private IService<Ship> shipService;
-
+	
 	@MockBean
 	private TravelService travelService;
-
+	
 	@Test
 	public void list() throws Exception {
-		mockMvc.perform(get("/pilots")).andDo(print()).andExpect(status().isOk());
+		mockMvc.perform(get("/ships")).andDo(print()).andExpect(status().isOk());
 	}
 
 	@Test
 	public void find() throws Exception {
-		mockMvc.perform(get("/pilots/1")).andDo(print()).andExpect(status().isOk());
+		mockMvc.perform(get("/ships/1")).andDo(print()).andExpect(status().isOk());
 	}
 
 	@Test
 	public void add() throws Exception {
-		String jsonString = "{ \"pilotCertification\": \"0000000\", \"name\": \"Will\", \"birthDate\": \"1996-04-29\", \"credits\": 5000, \"locationPlanet\": \"Aqua\", \"age\": 10 }";
+		String jsonString = "{ \"fuelCapacity\": 100, \"fuelLevel\": 70, \"weightCapacity\": 100, \"pilot\": { \"id\": 1 } }";
 
-		mockMvc.perform(post("/pilots").contentType(MediaType.APPLICATION_JSON).content(jsonString))
+		mockMvc.perform(post("/ships").contentType(MediaType.APPLICATION_JSON).content(jsonString))
 				.andExpect(status().isCreated());
 	}
 }
