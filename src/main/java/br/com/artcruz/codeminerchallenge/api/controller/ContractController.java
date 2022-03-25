@@ -1,6 +1,7 @@
 package br.com.artcruz.codeminerchallenge.api.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -22,6 +23,7 @@ import br.com.artcruz.codeminerchallenge.domain.exception.InvalidPlanetNameExcep
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Contract;
 import br.com.artcruz.codeminerchallenge.domain.service.ContractService;
 import br.com.artcruz.codeminerchallenge.domain.service.IService;
+import br.com.artcruz.codeminerchallenge.helper.PlanetHelper;
 import br.com.artcruz.codeminerchallenge.util.Utils;
 
 @RestController
@@ -62,15 +64,22 @@ public class ContractController {
 
 	@PutMapping("/execute/{contractId}")
 	public ResponseEntity<?> executeContract(@PathVariable("contractId") Integer id) {
-		Contract contract = contractService.find(id);
+		final HttpHeaders httpHeaders = new HttpHeaders();
+		
+		Contract contract = null;
 		
 		try {
-			((ContractService) contractService).executeContract(null);
-		} catch (Exception e) {
-			// TODO: handle exception
+			contract = contractService.find(id);
+			((ContractService) contractService).executeContract(contract);
+		} catch (RuntimeException e) {
+			httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(httpHeaders)
+					.body(Utils.getJsonBody("Message", e.getMessage()));
 		}
 		
-		return null;
+		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+		return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(Utils.getJsonBody("Message",
+				"Travel fufilled from " + contract.getOriginPlanet() + " to " + contract.getDestinationPlanet() + "!"));
 	}
 
 	@GetMapping("/{contractId}")

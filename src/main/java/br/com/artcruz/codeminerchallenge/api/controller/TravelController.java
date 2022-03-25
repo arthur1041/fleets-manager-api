@@ -12,12 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.artcruz.codeminerchallenge.domain.exception.BlockedRouteException;
-import br.com.artcruz.codeminerchallenge.domain.exception.EntityNotFoundException;
-import br.com.artcruz.codeminerchallenge.domain.exception.InvalidTravelDestinationException;
-import br.com.artcruz.codeminerchallenge.domain.exception.NoShipsAvailableException;
-import br.com.artcruz.codeminerchallenge.domain.exception.NotEnoughFuelException;
-import br.com.artcruz.codeminerchallenge.domain.exception.PilotTooYoungException;
+
 import br.com.artcruz.codeminerchallenge.domain.service.TravelService;
 import br.com.artcruz.codeminerchallenge.helper.PlanetHelper;
 import br.com.artcruz.codeminerchallenge.util.Utils;
@@ -37,31 +32,11 @@ public class TravelController {
 
 		try {
 			travelService.doTravel(idFrom, idTo, idPilot);
-		} catch (InvalidTravelDestinationException e) {
+		} catch (RuntimeException e) {
 			httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(httpHeaders)
 					.body(Utils.getJsonBody("Message", e.getMessage()));
-		} catch (BlockedRouteException e) {
-			httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(httpHeaders)
-					.body(Utils.getJsonBody("Message", e.getMessage()));
-		} catch (EntityNotFoundException e) {
-			httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(httpHeaders)
-					.body(Utils.getJsonBody("message", e.getMessage()));
-		} catch (NoShipsAvailableException e) {
-			httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(httpHeaders)
-					.body(Utils.getJsonBody("Message", e.getMessage()));
-		} catch (NotEnoughFuelException e) {
-			httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(httpHeaders)
-					.body(Utils.getJsonBody("Message", e.getMessage()));
-		} catch (PilotTooYoungException e) {
-			httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(httpHeaders)
-					.body(Utils.getJsonBody("Message", e.getMessage()));
-		}
+		} 
 
 		Map<Integer, String> planets = PlanetHelper.getPlanetsMap();
 

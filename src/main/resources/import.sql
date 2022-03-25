@@ -6,13 +6,13 @@ insert into pilot(id, birth_date, credits, location_planet, name, pilot_certific
 
 
 insert into ship(id, fuel_capacity, fuel_level, weight_capacity, pilot_id) values (1, 100, 70, 100, 1);
-insert into ship(id, fuel_capacity, fuel_level, weight_capacity, pilot_id) values (2, 150, 50, 100, 2);
+insert into ship(id, fuel_capacity, fuel_level, weight_capacity, pilot_id) values (2, 17000, 15000, 1000, 2);
 insert into ship(id, fuel_capacity, fuel_level, weight_capacity, pilot_id) values (3, 200, 80, 100, 3);
 
 insert into ship(id, fuel_capacity, fuel_level, weight_capacity, pilot_id) values (4, 150, 5, 100, 5);
 insert into ship(id, fuel_capacity, fuel_level, weight_capacity, pilot_id) values (5, 200, 5, 100, 5);
 
-insert into contract(id, description, destination_planet, origin_planet, value, pilot_id, accepted, accomplished) values (1, 'Regular travel', 'Aqua', 'Demeter', 100000, 1, false, false);
+insert into contract(id, description, destination_planet, origin_planet, value, pilot_id, accepted, accomplished) values (1, 'Regular travel', 'Aqua', 'Demeter', 100000, 2, false, false);
 insert into contract(id, description, destination_planet, origin_planet, value, pilot_id, accepted, accomplished) values (2, 'A very important travel', 'Andvari', 'Calas', 100000, 1, false, false);
 
 insert into contract(id, description, destination_planet, origin_planet, value, pilot_id, accepted, accomplished) values (3, 'A very important travel', 'Demeter', 'Aqua', 100000, 1, false, false);

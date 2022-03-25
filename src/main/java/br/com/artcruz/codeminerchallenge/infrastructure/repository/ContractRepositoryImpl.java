@@ -56,4 +56,6 @@ public class ContractRepositoryImpl implements IRepository<Contract> {
 		
 		return (List<Contract>) q.getResultList();
 	}
+	
+	
 }

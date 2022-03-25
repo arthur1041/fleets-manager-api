@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import br.com.artcruz.codeminerchallenge.domain.exception.ContractNotAcceptedExeception;
+import br.com.artcruz.codeminerchallenge.domain.exception.ContractExecutionExeception;
 import br.com.artcruz.codeminerchallenge.domain.exception.EmptyAttributeException;
 import br.com.artcruz.codeminerchallenge.domain.exception.EntityNotFoundException;
 import br.com.artcruz.codeminerchallenge.domain.exception.InvalidPlanetNameException;
@@ -28,6 +28,9 @@ public class ContractService implements IService<Contract> {
 
 	@Autowired
 	private IRepository<Pilot> pilotRepository;
+
+	@Autowired
+	private IService<Pilot> pilotService;
 
 	@Autowired
 	private TravelService travelService;
@@ -145,15 +148,26 @@ public class ContractService implements IService<Contract> {
 	}
 
 	public void executeContract(Contract contract) {
-		if (contract.isAccepted()) {
-			if (contract.getPayload().size() <= 0)
-				throw new NoPayloadException();
-		
-			travelService.doContractualTravel(contract);
-			
-			contract.setAccomplished(true);
-		} else {
-			throw new ContractNotAcceptedExeception();
+		if (contract.getAccomplished()) {
+			throw new ContractExecutionExeception("Cannot start travel because the contract is already finished.");
 		}
+		if (!contract.isAccepted()) {
+			throw new ContractExecutionExeception("Cannot start travel because the contract is not accepted yet");
+		}
+
+		if (contract.getPayload().size() <= 0)
+			throw new NoPayloadException();
+
+		travelService.doContractualTravel(contract);
+
+		contract.setAccomplished(true);
+		Pilot pilot = contract.getPilot();
+
+		// 6. Grant credits to the pilot after fulfilling the contract
+		pilot.addCredits(contract.getValue());
+
+		contractRepository.createOrUpdate(contract);
+		pilotService.update(pilot.getId(), pilot);
+
 	}
 }

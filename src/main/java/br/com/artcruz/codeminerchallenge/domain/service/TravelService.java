@@ -11,6 +11,7 @@ import br.com.artcruz.codeminerchallenge.domain.exception.BlockedRouteException;
 import br.com.artcruz.codeminerchallenge.domain.exception.InvalidTravelDestinationException;
 import br.com.artcruz.codeminerchallenge.domain.exception.NoShipsAvailableException;
 import br.com.artcruz.codeminerchallenge.domain.exception.NotEnoughFuelException;
+import br.com.artcruz.codeminerchallenge.domain.exception.PayloadTooHeavyException;
 import br.com.artcruz.codeminerchallenge.domain.exception.PilotTooYoungException;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Contract;
 import br.com.artcruz.codeminerchallenge.domain.model.entity.Pilot;
@@ -108,16 +109,16 @@ public class TravelService {
 
 			for (Ship ship : pilotShips) {
 				if (ship.getWeightCapacity() >= weight)
-					throw new NoShipsAvailableException();
+					shipsThatCanHandleTheWeight.add(ship);
 			}
 
 			if (shipsThatCanHandleTheWeight.size() <= 0) {
-				throw new NotEnoughFuelException();
+				throw new PayloadTooHeavyException();
 			}
 
 			Ship shipWithMostFuel = pilot.getShips().get(0);
 			for (Ship ship : shipsThatCanHandleTheWeight) {
-				if (ship.getFuelLevel() > shipWithMostFuel.getFuelLevel()) {
+				if (ship.getFuelLevel() > route.getFuelCost()) {
 					shipWithMostFuel = ship;
 				}
 			}
@@ -126,7 +127,7 @@ public class TravelService {
 				throw new NotEnoughFuelException();
 			}
 
-			shipWithMostFuel.setFuelLevel(shipWithMostFuel.getFuelLevel() - route.getFuelCost());
+			shipWithMostFuel.addFuel(-route.getFuelCost());
 
 			Map<Integer, String> planets = PlanetHelper.getPlanetsMap();
 
@@ -137,14 +138,9 @@ public class TravelService {
 	}
 
 	public void doContractualTravel(Contract contract) {
-			int idPlanetFrom = PlanetHelper.getPlanetIdByName(contract.getOriginPlanet());
-			int idPlanetTo = PlanetHelper.getPlanetIdByName(contract.getDestinationPlanet());
-			doTravel(idPlanetFrom, idPlanetTo, contract.getPilot().getId(), contract.getResourcesTotalWeight());
-
-			Pilot pilot = contract.getPilot();
-			
-			// 6. Grant credits to the pilot after fulfilling the contract
-			pilot.addCredits(contract.getValue());
+		int idPlanetFrom = PlanetHelper.getPlanetIdByName(contract.getOriginPlanet());
+		int idPlanetTo = PlanetHelper.getPlanetIdByName(contract.getDestinationPlanet());
+		doTravel(idPlanetFrom, idPlanetTo, contract.getPilot().getId(), contract.getResourcesTotalWeight());
 	}
 
 }
