@@ -13,6 +13,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+/**
+ * @author: Arthur Cruz
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 public class ContractControllerTest {

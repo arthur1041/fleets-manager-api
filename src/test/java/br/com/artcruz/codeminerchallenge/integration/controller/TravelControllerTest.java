@@ -10,6 +10,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+/**
+ * @author: Arthur Cruz
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 public class TravelControllerTest {
