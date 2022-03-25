@@ -17,6 +17,9 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import br.com.artcruz.codeminerchallenge.domain.enums.PlanetEnum;
+import br.com.artcruz.codeminerchallenge.util.Utils;
+
 /**
  * @author: Arthur Cruz
  */
@@ -107,7 +110,11 @@ public class Contract implements Serializable {
 	}
 
 	public void setOriginPlanet(String originPlanet) {
-		this.originPlanet = originPlanet;
+		if(!Utils.validatePlanetName(originPlanet)) {
+			this.originPlanet = PlanetEnum.ANDVARI.label;
+		} else {
+			this.originPlanet = originPlanet != null ? originPlanet.toLowerCase() : originPlanet;
+		}
 	}
 
 	public String getDestinationPlanet() {
@@ -115,7 +122,11 @@ public class Contract implements Serializable {
 	}
 
 	public void setDestinationPlanet(String destinationPlanet) {
-		this.destinationPlanet = destinationPlanet;
+		if(!Utils.validatePlanetName(destinationPlanet)) {
+			this.destinationPlanet = PlanetEnum.ANDVARI.label;
+		} else {
+			this.destinationPlanet = destinationPlanet != null ? destinationPlanet.toLowerCase() : destinationPlanet;
+		}
 	}
 
 	public Integer getValue() {

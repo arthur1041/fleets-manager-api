@@ -17,6 +17,9 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import br.com.artcruz.codeminerchallenge.domain.enums.PlanetEnum;
+import br.com.artcruz.codeminerchallenge.util.Utils;
+
 /**
  * @author: Arthur Cruz
  */
@@ -129,7 +132,11 @@ public class Pilot implements Serializable {
 	}
 
 	public void setLocationPlanet(String locationPlanet) {
-		this.locationPlanet = locationPlanet;
+		if(!Utils.validatePlanetName(locationPlanet)) {
+			this.locationPlanet = PlanetEnum.ANDVARI.label;
+		} else {
+			this.locationPlanet = locationPlanet;
+		}
 	}
 
 	public List<Ship> getShips() {
