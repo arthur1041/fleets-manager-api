@@ -2,6 +2,9 @@
 
 # API Documentation
 
+This API was built using Java and Spring Boot.
+Below is the information on how to set up and run it.
+
 ## Endpoints
 
 ### Contracts
