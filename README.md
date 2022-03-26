@@ -278,7 +278,7 @@ Assuming that you installed all needed softwares, we can now proceed to executin
 #### And *voilà*! Now the application should be up and running. Now you can start to use the endpoints
 
 ## Using the application's functionalities
-1. You can ddd pilots and their ships to the system by using these endpoints: **POST /pilots; POST /ships**
+1. You can add pilots and their ships to the system by using these endpoints: **POST /pilots; POST /ships**
 2. Publish transport contracts by using this endpoint: **POST /contracts**
 3. Freely travel between planets by using this endpoint: **PUT /travel/from/:idFrom/to/:idTo/withpilot/:idPilot**
 4. List open contracts by using this endpoint: **GET /contracts/open**
